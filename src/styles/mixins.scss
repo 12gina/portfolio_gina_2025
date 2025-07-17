@@ -1,0 +1,11 @@
+@use "sass:map";
+@use "variables" as vars;
+
+/* mixins.scss */
+@mixin respond($breakpoint) {
+  @if map.has-key(vars.$breakpoints, $breakpoint) {
+    @media #{map.get(vars.$breakpoints, $breakpoint)} {
+      @content;
+    }
+  }
+}

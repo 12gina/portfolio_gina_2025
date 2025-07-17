@@ -1,0 +1,25 @@
+$breakpoints: (
+  sm: "(max-width: 480px)",
+  md: "(max-width: 1200px)",
+  lg: "(min-width: 1201px)",
+  overMd: "(min-width: 481px)",
+);
+
+
+:root {
+    // 폰트
+    --custom-font: "Pretendard";
+
+    // 색상 모노
+    --color-gray-10: #ebeef0;
+    --color-gray-50: #757575;
+    --color-text-60: #666666;
+    --color-gray-80: #353535;
+    --color-black: #222222;
+
+    // 색상 시그니처
+    --color-pink: #E01087;
+    --color-yellow: #F9E000;
+    --color-yellow-dark: #F2B508;
+    --rgb-main-blue: 11, 111, 232;
+}

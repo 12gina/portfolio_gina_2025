@@ -1,0 +1,82 @@
+@charset "UTF-8";
+@use "variables" as vars; // 매개 변수는 모듈 형식으로 불러올 수 없으므로
+@use "mixins" as *;
+@use "common"; // "as * 를 사용하면 바로 속성들을 사용할 수 있으니 '.속성'처럼 모듈형식으로 불러오는 것이 더 안전함.
+// @use "landing";
+// @use "portfolio";
+// @use "company";
+// @use "proposal";
+// @use "whatWeDo";
+
+@font-face {
+	font-family: 'Pretendard', sans-serif;
+	font-weight: 400;
+	font-style: regular;
+	font-display: swap;
+	src: url("../assets/fonts/Pretendard-Regular.subset.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard', sans-serif;
+	font-weight: 500;
+	font-style: medium;
+	font-display: swap;
+	src: url("../assets/fonts/Pretendard-Medium.subset.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard', sans-serif;
+	font-weight: 500;
+	font-weight: 600;
+	font-style: semibold;
+	font-display: swap;
+	src: url("../assets/fonts/Pretendard-SemiBold.subset.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Pretendard', sans-serif;
+	font-weight: 700;
+	font-style: bold;
+	font-display: swap;
+	src: url("../assets/fonts/Pretendard-Bold.subset.woff2") format('woff2');
+}
+
+@font-face {
+	font-family: 'Montserrat';
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+	src: url("../assets/fonts/Montserrat-VariableFont_wght.ttf") format('truetype-variations');
+}
+
+
+@keyframes wave {
+  30% {
+    -webkit-transform: translate3d(0, -5px, 0) rotate(5deg);
+    transform: translate3d(0, -5px, 0) rotate(5deg)
+  }
+  50% {
+    -webkit-transform: translate3d(0, -3px, 0) rotate(-4deg);
+    transform: translate3d(0, -3px, 0) rotate(-4deg)
+  }
+  80% {
+    -webkit-transform: translate3d(0, 0, 0) rotate(-3deg);
+    transform: translate3d(0, 0, 0) rotate(-3deg)
+  }
+  100% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg)
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    transform: translateY(8.5rem);
+  }
+  30%, 60% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10.5rem);
+  }
+}

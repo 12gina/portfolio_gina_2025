@@ -1,5 +1,5 @@
 html {
-  font-family: 'Pretendard', sans-serif;
+  font-family: 'BMDOHYEON', sans-serif;
   font-size: 62.5%;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -71,7 +71,24 @@ main {
     width: 100vw;
     height: 100vh;
     color: white;
+    // 타이틀
     > section:nth-of-type(1) {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      > div {
+        position: absolute;
+        z-index: 1;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        white-space: wrap;
+        font-size: clamp(0.1vw, 3vw, 30rem);
+      }
+    }
+    > section:nth-of-type(2) {
         background-color: black;
         aspect-ratio: 16 / 9;
     }
@@ -86,5 +103,9 @@ video {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    z-index: -1;
+    // position: absolute;
+    // top: 0;
+    // left: 0;
 }
 

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import './styles/index.scss'
+import { Title } from './constants/constants'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -8,11 +9,19 @@ function App() {
   return (
     <main>
 
-      <video id={'intro-video'} autoPlay muted loop playsInline>
-        <source
-            src={introVideo}
-            type="video/mp4"/>
-      </video>
+      {/* 타이틀 */}
+      <section>
+        <video id={'intro-video'} autoPlay muted loop playsInline>
+          <source
+              src={introVideo}
+              type="video/mp4"/>
+        </video>
+        <div>
+          {Title.map((v, i)=>(
+            <span key={i} id={`char_${i}`}>{v==="-"?<br/>:v}</span>
+          ))}
+        </div>
+      </section>
 
       <section>
         자기소개

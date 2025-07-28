@@ -20,23 +20,25 @@ export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, currentSection})
         setIsMenuModalOpen(false);
     }
     return (
-        <nav className={isMenuModalOpen? "on":""}>
-            <div>
-                <div className="main-menu">
-                    {menuList.map((v, i)=>(
-                        <span key={i} className={(mouseOverMenu===v.menu)||(!mouseOverMenu&&currentSection===v.id)? "on" : ""} onClick={()=>closeModal(v.ref)}
-                        onMouseOver={(e)=>handleMouseOver(e)} onMouseLeave={handleMouseLeave}>{v.menu}</span>
-                    ))}
-                </div>
-
+        <>
+            <nav className={isMenuModalOpen? "on":""}>
                 <div>
-                    <span>Kim Jinhwa</span>
-                    <span>010.8835.7380</span>
-                    <span>12cometome@naver.com</span>
+                    <div className="main-menu">
+                        {menuList.map((v, i)=>(
+                            <span key={i} className={(mouseOverMenu===v.menu)||(!mouseOverMenu&&currentSection===v.id)? "on" : ""} onClick={()=>closeModal(v.ref)}
+                            onMouseOver={(e)=>handleMouseOver(e)} onMouseLeave={handleMouseLeave}>{v.menu}</span>
+                        ))}
+                    </div>
+
+                    <div>
+                        <span>Kim Jinhwa</span>
+                        <span>010.8835.7380</span>
+                        <span>12cometome@naver.com</span>
+                    </div>
                 </div>
-            </div>
+            </nav>
             <MouseTracker/>
-        </nav>
+        </>
 
     )
 }

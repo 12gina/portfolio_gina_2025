@@ -11,6 +11,7 @@ function App() {
     const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
     const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
     const [colorChange, setColorChange] = useState(false)
+    const [currentSection, setCurrentSection] = useState("aboutMe");
     
     const modalOpenTimerRef = useRef(null);
     const navOnTimerRef = useRef(null);
@@ -19,8 +20,51 @@ function App() {
     const experiencesRef = useRef(null);
     const projectsRef = useRef(null);
     const skillsRef = useRef(null);
+    
+    useEffect(()=>{
+      const handleScroll = () => {
+        
+        if (!aboutMeRef?.current) return;
+        const aboutMeTop = aboutMeRef.current.getBoundingClientRect().top;
+        // const experiencesTop = experiencesRef.current.getBoundingClientRect().top;
+        // const projectsTop = projectsRef.current.getBoundingClientRect().top;
+        // const skillsTop = skillsRef.current.getBoundingClientRect().top;
+        
+        if (aboutMeTop <= 200) {
+          console.log("dksljdlsjdl")
+          setCurrentSection(aboutMeRef.current.id) // set 말고 ref 자체를 메뉴버튼에 전달해보자
+        }
+      }
+        
+      window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
 
-    const [currentSection, setCurrentSection] = useState("");
+    }, [])
+
+    useEffect(()=>{
+        if (isMenuButtonOn) {
+            modalOpenTimerRef.current = setTimeout(()=>setIsMenuModalOpen(true), 300)
+        }
+    }, [isMenuButtonOn])
+
+    useEffect(()=>{
+        if (!isMenuModalOpen) {
+            modalOpenTimerRef.current = setTimeout(()=>setIsMenuButtonOn(false), 300)
+        } 
+    }, [isMenuModalOpen])
+    
+    useEffect(()=>{
+      window.scrollTo(0, 0);
+        // window.addEventListener("resize", handleResize);
+        // handleResize(); // 최초 실행
+
+      return ()=>{
+          clearTimeout(modalOpenTimerRef);
+          clearTimeout(navOnTimerRef);
+          // window.removeEventListener('resize', handleResize);
+          // window.removeEventListener('scroll', onScroll);
+      }
+    }, [])
 
     // const getDeviceType = () => {
     //     const width = window.innerWidth;
@@ -35,39 +79,6 @@ function App() {
     // const handleResize = () => {
     //     getDeviceType();
     // };
-
-    useEffect(()=>{
-        if (isMenuButtonOn) {
-            modalOpenTimerRef.current = setTimeout(()=>setIsMenuModalOpen(true), 300)
-        }
-    }, [isMenuButtonOn])
-
-    useEffect(()=>{
-        if (!isMenuModalOpen) {
-            modalOpenTimerRef.current = setTimeout(()=>setIsMenuButtonOn(false), 300)
-        } 
-    }, [isMenuModalOpen])
-
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        console.log(currentSection, "currentSection~~~")
-
-        if (aboutMeRef)
-          setCurrentSection(aboutMeRef.current.id)
-
-    }, []);
-
-    useEffect(()=>{
-        // window.addEventListener("resize", handleResize);
-        // handleResize(); // 최초 실행
-
-        return ()=>{
-            clearTimeout(modalOpenTimerRef);
-            clearTimeout(navOnTimerRef);
-            // window.removeEventListener('resize', handleResize);
-            // window.removeEventListener('scroll', onScroll);
-        }
-    }, [])
 
   return (
     <>

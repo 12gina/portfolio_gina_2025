@@ -2,7 +2,7 @@ import { useState } from "react";
 import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
 
-export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, refList}) => {
+export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, currentSection}) => {
 
     const [mouseOverMenu, setMouseOverMenu] = useState("")
 
@@ -20,11 +20,11 @@ export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, refList}) => {
         setIsMenuModalOpen(false);
     }
     return (
-        <nav>
+        <nav className={isMenuModalOpen? "on":""}>
             <div>
                 <div className="main-menu">
                     {menuList.map((v, i)=>(
-                        <span key={i} className={(mouseOverMenu===v.menu)? "on" : ""} onClick={()=>closeModal(v.ref)}
+                        <span key={i} className={(mouseOverMenu===v.menu)||(!mouseOverMenu&&currentSection===v.id)? "on" : ""} onClick={()=>closeModal(v.ref)}
                         onMouseOver={(e)=>handleMouseOver(e)} onMouseLeave={handleMouseLeave}>{v.menu}</span>
                     ))}
                 </div>

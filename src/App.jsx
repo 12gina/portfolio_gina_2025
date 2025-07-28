@@ -12,8 +12,15 @@ function App() {
     const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
     const [colorChange, setColorChange] = useState(false)
     
-    const modalOpenTimerRef = useRef(null)
-    const navOnTimerRef = useRef(null)
+    const modalOpenTimerRef = useRef(null);
+    const navOnTimerRef = useRef(null);
+
+    const aboutMeRef = useRef(null);
+    const experiencesRef = useRef(null);
+    const projectsRef = useRef(null);
+    const skillsRef = useRef(null);
+
+    const [currentSection, setCurrentSection] = useState("");
 
     // const getDeviceType = () => {
     //     const width = window.innerWidth;
@@ -43,6 +50,11 @@ function App() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        console.log(currentSection, "currentSection~~~")
+
+        if (aboutMeRef)
+          setCurrentSection(aboutMeRef.current.id)
+
     }, []);
 
     useEffect(()=>{
@@ -78,7 +90,7 @@ function App() {
         </section>
 
         {/* 자기소개 */}
-        <section>
+        <section ref={aboutMeRef} id={"aboutMe"}>
           <div>
             자기소개
           </div>
@@ -108,7 +120,7 @@ function App() {
       </main>
 
       <MenuButton isMenuButtonOn={isMenuButtonOn} colorChange={colorChange} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
-      <MenuModal/>
+      <MenuModal isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection}/>
 
     </>
   )

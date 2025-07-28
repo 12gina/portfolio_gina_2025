@@ -1,8 +1,8 @@
 export const menuList = [
-    {menu:"ABOUT ME", ref:"aboutMe"},
-    {menu:"EXPERIENCES", ref:"introduce"},
-    {menu:"PROJECTS", ref:"introduce"},
-    {menu:"SKILLS", ref:"introduce"},
+    {menu:"ABOUT ME", id:"aboutMe"},
+    {menu:"EXPERIENCES", id:"experiences"},
+    {menu:"PROJECTS", id:"projects"},
+    {menu:"SKILLS", id:"skills"},
 ]
 
 

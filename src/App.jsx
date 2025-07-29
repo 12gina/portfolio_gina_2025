@@ -4,6 +4,8 @@ import './styles/index.scss'
 import { slogan } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/MenuButton'
+import { SectionLayout } from './components/sectionLayout'
+import { DownloadOutlined } from '@ant-design/icons'
 
 
 function App() {
@@ -16,30 +18,12 @@ function App() {
     const modalOpenTimerRef = useRef(null);
     const navOnTimerRef = useRef(null);
 
-    const aboutMeRef = useRef(null);
-    const experiencesRef = useRef(null);
-    const projectsRef = useRef(null);
-    const skillsRef = useRef(null);
-    
-    useEffect(()=>{
-      const handleScroll = () => {
-        
-        if (!aboutMeRef?.current) return;
-        const aboutMeTop = aboutMeRef.current.getBoundingClientRect().top;
-        // const experiencesTop = experiencesRef.current.getBoundingClientRect().top;
-        // const projectsTop = projectsRef.current.getBoundingClientRect().top;
-        // const skillsTop = skillsRef.current.getBoundingClientRect().top;
-        
-        if (aboutMeTop <= 200) {
-          console.log("dksljdlsjdl")
-          setCurrentSection(aboutMeRef.current.id) // set 말고 ref 자체를 메뉴버튼에 전달해보자
-        }
-      }
-        
-      window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-
-    }, [])
+    const sectionRefs = useRef({
+      aboutMe: null,
+      experiences: null,
+      projects: null,
+      skills: null,
+    });
 
     useEffect(()=>{
         if (isMenuButtonOn) {
@@ -55,30 +39,30 @@ function App() {
     
     useEffect(()=>{
       window.scrollTo(0, 0);
-        // window.addEventListener("resize", handleResize);
-        // handleResize(); // 최초 실행
+
+      const handleScroll = () => {
+        if (!sectionRefs?.current) return;
+        const aboutMeTop = sectionRefs.current.aboutMe?.getBoundingClientRect().top;
+        const experiencesTop = sectionRefs.current.experiences?.getBoundingClientRect().top;
+        // const projectsTop = projectsRef.current.getBoundingClientRect().top;
+        // const skillsTop = skillsRef.current.getBoundingClientRect().top;
+        
+        if (aboutMeTop <= 200) {
+          setCurrentSection(sectionRefs.current.aboutMe.id)
+        }
+        if (experiencesTop <= 200) {
+          setCurrentSection(sectionRefs.current.experiences.id)
+        }
+      }
+      window.addEventListener('scroll', handleScroll)
 
       return ()=>{
           clearTimeout(modalOpenTimerRef);
           clearTimeout(navOnTimerRef);
           // window.removeEventListener('resize', handleResize);
-          // window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('scroll', handleScroll);
       }
     }, [])
-
-    // const getDeviceType = () => {
-    //     const width = window.innerWidth;
-    //     if (width <= 1200)
-    //         setDevice("tablet")
-    //     else if (width <= 480)
-    //         setDevice("mobile")
-    //     else
-    //         setDevice("desktop")
-    // };
-
-    // const handleResize = () => {
-    //     getDeviceType();
-    // };
 
   return (
     <>
@@ -101,37 +85,49 @@ function App() {
         </section>
 
         {/* 자기소개 */}
-        <section ref={aboutMeRef} id={"aboutMe"}>
+        <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
           <div>
-            자기소개
-          </div>
-          <div>
+              <div className='slogan'>
+                <span>{slogan.map((v, i)=>(
+                  <span key={i} id={`char_${i}`}>{v}</span>
+                ))}</span>
+                는 마음으로 개발자의 꿈을 꾸게 되었습니다.
+              </div>
 
-            <div>
-              {slogan.map((v, i)=>(
-                <span key={i} id={`char_${i}`}>{v}</span>
-              ))}
-              <span>는 마음으로 개발자의 꿈을 꾸게 되었습니다.</span>
+              {`코딩하는 것이 즐거운 프론트엔드 개발자입니다.
+                일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다. 
+                또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
+
+              <div>
+                정보처리기사 <span>2024. 09 / 한국산업인력공단</span><br/>
+                2종보통운전면허 <span>2015. 12 / 경찰청(운전면허시험관리단)</span><br/>
+                ICDL ( International Computer Driving Licence) <span>2011. 07  (기본 office 활용 능력 인증 자격)</span>
+              </div>
+
+              <div>
+                📞 010-8835-7380<br/>
+                ✉️ 12cometome@naver.com<br/>
+                🏠 서울 강남구 역삼동 거주<br/>
+              </div>
+
+              <div>
+                이력서 다운로드
+                <DownloadOutlined style={{fontSize:22}}/>
+              </div>
             </div>
+        </SectionLayout>
+        
+        {/* 경력 */}
+        <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
 
-            {`코딩하는 것이 즐거운 프론트엔드 개발자입니다.
-              일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다. 
-              또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
-            <div>
-              📞 010-8835-7380
-              ✉️ 12cometome@naver.com
-              🏠 서울 강남구 역삼동 거주
-            </div>
 
-            <button>
-              이력서 다운로드
-            </button>
-          </div>
-        </section>
+        </SectionLayout>
+
+
       </main>
 
-      <MenuButton isMenuButtonOn={isMenuButtonOn} colorChange={colorChange} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
-      <MenuModal isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection}/>
+      <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} colorChange={colorChange} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
+      <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection}/>
 
     </>
   )

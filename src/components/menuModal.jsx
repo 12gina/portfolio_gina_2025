@@ -2,7 +2,7 @@ import { useState } from "react";
 import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
 
-export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, currentSection}) => {
+export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection}) => {
 
     const [mouseOverMenu, setMouseOverMenu] = useState("")
 
@@ -14,9 +14,14 @@ export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, currentSection})
         setMouseOverMenu("")
     }
 
-    function closeModal () {
-        // if (route)
-            // navigate(route);
+    function closeModal (id) {
+        const el = sectionRefs.current[id];
+        if (el) {
+            el.scrollIntoView({ 
+            behavior: 'smooth',  
+            block: 'start'       // 섹션의 시작 부분이 뷰포트 상단에 맞춰지도록
+            });
+        }
         setIsMenuModalOpen(false);
     }
     return (
@@ -25,7 +30,7 @@ export const MenuModal = ({isMenuModalOpen, setIsMenuModalOpen, currentSection})
                 <div>
                     <div className="main-menu">
                         {menuList.map((v, i)=>(
-                            <span key={i} className={(mouseOverMenu===v.menu)||(!mouseOverMenu&&currentSection===v.id)? "on" : ""} onClick={()=>closeModal(v.ref)}
+                            <span key={i} className={(mouseOverMenu===v.menu)||(!mouseOverMenu&&currentSection===v.id)? "on" : ""} onClick={()=>closeModal(v.id)}
                             onMouseOver={(e)=>handleMouseOver(e)} onMouseLeave={handleMouseLeave}>{v.menu}</span>
                         ))}
                     </div>

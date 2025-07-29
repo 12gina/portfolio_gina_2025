@@ -2,7 +2,7 @@ import { useState } from "react";
 import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
 
-export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection}) => {
+export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection, setCurrentSection}) => {
 
     const [mouseOverMenu, setMouseOverMenu] = useState("")
 
@@ -22,6 +22,7 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
             block: 'start'       // 섹션의 시작 부분이 뷰포트 상단에 맞춰지도록
             });
         }
+        setCurrentSection(id);
         setIsMenuModalOpen(false);
     }
     return (

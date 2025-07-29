@@ -34,3 +34,18 @@ export const CircularText = ({className}) => (
         </text>
     </svg>
 );
+
+export const ExpCard = ({company, department, duration, description}) => (
+    <div className='exp-card'>
+        <div>
+        {company}<br/>
+        <span>
+            {department}<br/>
+            {duration}<br/>
+            </span>
+        </div>
+        <div>
+            {description}
+        </div>
+    </div>
+)

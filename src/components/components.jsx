@@ -36,7 +36,7 @@ export const CircularText = ({className}) => (
 );
 
 export const ExpCard = ({company, department, duration, description}) => (
-    <div className='exp-card'>
+    <article className='exp-card'>
         <div>
         {company}<br/>
         <span>
@@ -47,5 +47,19 @@ export const ExpCard = ({company, department, duration, description}) => (
         <div>
             {description}
         </div>
-    </div>
+    </article>
+)
+
+
+export const ProjectCard = ({title, image, skills, description}) => (
+    <article className='project-card'>
+        <img src={image} alt="image"/>
+        <div>{title}</div>
+        <div>
+            {description}
+        </div>
+        <div>
+            {skills}
+        </div>
+    </article>
 )

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import './styles/index.scss'
-import { expData, slogan } from './constants/constants'
+import { expData, projectData, slogan } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/MenuButton'
 import { SectionLayout } from './components/sectionLayout'
 import { DownloadOutlined } from '@ant-design/icons'
-import { ExpCard } from './components/components'
+import { ExpCard, ProjectCard } from './components/components'
 
 
 function App() {
@@ -109,9 +109,9 @@ function App() {
               </div>
 
               <div>
-                {/* 📞 010-8835-7380<br/> */}
+                📞 010-8835-7380<br/>
                 ✉️ 12cometome@naver.com<br/>
-                {/* 🏠 서울 강남구 역삼동 거주<br/> */}
+                🏠 서울 강남구 역삼동 거주<br/>
               </div>
 
               {/* <div>
@@ -134,8 +134,8 @@ function App() {
         {/* 프로젝트 */}
         <SectionLayout title={"Projects"} id={"projects"} ref={el => sectionRefs.current.projects = el}>
           <div>
-            {expData.map((v)=>(
-              <ExpCard key={v.company} company={v.company} department={v.department} duration={v.duraiton} description={v.description}/>
+            {projectData.map((v)=>(
+              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills}/>
             ))}
           
           </div>

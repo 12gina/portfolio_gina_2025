@@ -135,9 +135,8 @@ function App() {
         <SectionLayout title={"Projects"} id={"projects"} ref={el => sectionRefs.current.projects = el}>
           <div>
             {projectData.map((v)=>(
-              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills}/>
+              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task}/>
             ))}
-          
           </div>
         </SectionLayout>
 

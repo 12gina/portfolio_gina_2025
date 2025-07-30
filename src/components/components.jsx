@@ -53,7 +53,9 @@ export const ExpCard = ({company, department, duration, description}) => (
 
 export const ProjectCard = ({title, image, skills, description, task}) => (
     <article className='project-card'>
-        <img src={image} alt="image"/>
+        <div>
+            <img src={image} alt="image"/>
+        </div>
         <div>{title}</div>
         <div>{description}</div>
         <div>{task}</div>

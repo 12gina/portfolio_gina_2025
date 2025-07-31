@@ -72,3 +72,9 @@ export const SkillCard = ({skills, description}) => (
         ))}</div>
     </article>
 )
+
+export const Alert = ({on}) => (
+    <article className={`alert ${on? "on" : "off"}`}>
+        copied!
+    </article>
+)

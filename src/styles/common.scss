@@ -246,8 +246,20 @@ nav {
         font-size: clamp( 0.1vw, 2.6vw, 2.6em);
         letter-spacing: -1px;
       }
+      > span, a {
+        opacity: 0.7;
+        transition: opacity 0.3s ease;
+        &:hover {
+          opacity: 1;
+          color: var(--color-black);
+        }
+      }
       > span:nth-of-type(1) {
+        opacity: 1;
         cursor:default;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }
@@ -484,6 +496,27 @@ nav {
   }
 }
 
+.alert {
+  position: fixed;
+  z-index: 102;
+  top: 48%;
+  left: 48%;
+  pointer-events: none;
+  transform: translateY(100%);
+  font-size: 1.2rem;
+  background-color: white;
+  padding: 0.5rem 2.2rem;
+  border-radius: 5px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  &.on {
+    animation: slide-in 0.3s ease forwards;
+  }
+  &.off {
+    animation: slide-out 0.3s ease forwards;
+  }
+}
+
+
 
 /* 애니메이션 */
 
@@ -503,5 +536,27 @@ nav {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 0.8;
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateY(0%);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
   }
 }

@@ -2,10 +2,12 @@ import { useState } from "react";
 import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
 import { GithubOutlined, MailOutlined } from "@ant-design/icons";
+import { Alert } from "./components";
 
 export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection, setCurrentSection}) => {
 
     const [mouseOverMenu, setMouseOverMenu] = useState("")
+    const [isAlertOn, setIsAlertOn] = useState(false)
 
     function handleMouseOver (e) {
         setMouseOverMenu(e.target.innerText)
@@ -27,8 +29,15 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
         setIsMenuModalOpen(false);
     }
 
-    function copyText () {
-
+    function copyText (v) {
+        setIsAlertOn(false)
+        navigator.clipboard.writeText(v)
+        .then(() => {
+            setIsAlertOn(true)
+            setTimeout(()=>setIsAlertOn(false), 1000)
+        }).catch((err) => {
+        console.error("복사 실패:", err);
+      });
     }
 
     return (
@@ -44,12 +53,13 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
 
                     <div>
                         <span>Kim Jinhwa</span>
-                        <span>010.8835.7380</span>
-                        <span>12cometome@naver.com</span>
+                        <span onClick={()=>copyText("010-8835-7380")}>010.8835.7380</span>
+                        <span onClick={()=>copyText("cometome1212@gmail.com")}>cometome1212@gmail.com</span>
                         <a href="" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
                     </div>
                 </div>
             </nav>
+            <Alert on={isAlertOn}/>
             <MouseTracker/>
         </>
 

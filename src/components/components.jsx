@@ -22,7 +22,7 @@ export const CircularText = ({className}) => (
             fill="white"
             fontSize="16"
             fontWeight="700"
-            letterSpacing="4.5"
+            letterSpacing="5"
         >
             <textPath
                 href="#circlePath"
@@ -50,7 +50,6 @@ export const ExpCard = ({company, department, duration, description}) => (
     </article>
 )
 
-
 export const ProjectCard = ({title, image, skills, description, task}) => (
     <article className='project-card'>
         <div>
@@ -59,6 +58,15 @@ export const ProjectCard = ({title, image, skills, description, task}) => (
         <div>{title}</div>
         <div>{description}</div>
         <div>{task}</div>
+        <div>{skills.map((v, i)=>(
+            <img key={i} src={v} alt="skill icon"/>
+        ))}</div>
+    </article>
+)
+
+export const SkillCard = ({skills, description}) => (
+    <article className='skill-card'>
+        <div>{description}</div>
         <div>{skills.map((v, i)=>(
             <img key={i} src={v} alt="skill icon"/>
         ))}</div>

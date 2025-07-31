@@ -37,8 +37,9 @@ export const slogan = ['하', '고', '싶', '은', ' ', '것', '을', ' ', '하'
 
 
 export const expData = [
-    {company:"엔조이소프트", department:"기술연구소", duraiton:"2025.03-2025.07", description:"- React, Next, Electron 등을 활용한 키오스크 앱, 관리자 웹, 신원인증 앱 개발"},
+    {company:"엔조이소프트", department:"기술연구소", duraiton:"2025.03-2025.07", description:"- React JS, Electron JS 등을 활용한 키오스크 앱, 관리자 웹 유지보수 및 신규 기능 개발\n- Next JS를 활용한 신원인증 앱 개발"},
     {company:"프로지스트", department:"개발팀", duraiton:"2024.08-2025.02", description:"- React, Next, Electron 등을 활용한 웹 Front end 개발\n- 쇼핑몰, 홈페이지, ERP등 개발 참여\n- 고객사 파견 경험 有"},
+    {company:"웹서비스 풀스텍 개발\n(교육)", department:"이젠아카데미강남점", duraiton:"2023.11-2024.05", description:"- Java, Python을 활용한 AI 챗봇 개발\n- DBMS MySQL 데이터베이스 구축\n- Spring Boot Framework 활용 등"},
 ]
 
 export const projectData = [
@@ -52,4 +53,13 @@ export const projectData = [
     {image: img2, title:"만쿠무역 ERP 앱", description:"회사(무역) ERP 앱", task:"· 신규 앱 프론트 구현", skills:[sk_electron, sk_sass, sk_gsap]},
     {image: img1, title:"만쿠무역 홈페이지", description:"회사(무역) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap]},
     {image: img0, title:"Gimunity / medibot", description:"국비지원교육 프로젝트", task:"구글 드라이브 문서 참고", skills:[sk_react, sk_redux, sk_mysql, sk_java]},
+]
+
+export const skillData = [
+    {description: "능숙하게 사용할 수 있습니다.",
+        skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_socket, sk_sass, sk_pm2]},
+    {description: "기본적인 기능을 활용할 수 있습니다.",
+        skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, ]},
+    {description: "사용해본 경험이 있습니다.",
+        skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_pm2]},
 ]

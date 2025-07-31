@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
+import { GithubOutlined, MailOutlined } from "@ant-design/icons";
 
 export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection, setCurrentSection}) => {
 
@@ -25,6 +26,11 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
         setCurrentSection(id);
         setIsMenuModalOpen(false);
     }
+
+    function copyText () {
+
+    }
+
     return (
         <>
             <nav className={isMenuModalOpen? "on":""}>
@@ -40,6 +46,7 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
                         <span>Kim Jinhwa</span>
                         <span>010.8835.7380</span>
                         <span>12cometome@naver.com</span>
+                        <a href="" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
                     </div>
                 </div>
             </nav>

@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import './styles/index.scss'
-import { expData, projectData, slogan } from './constants/constants'
+import { expData, projectData, skillData, slogan } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/MenuButton'
 import { SectionLayout } from './components/sectionLayout'
 import { DownloadOutlined } from '@ant-design/icons'
-import { ExpCard, ProjectCard } from './components/components'
+import { ExpCard, ProjectCard, SkillCard } from './components/components'
 
 
 function App() {
@@ -127,7 +127,6 @@ function App() {
             {expData.map((v)=>(
               <ExpCard key={v.company} company={v.company} department={v.department} duration={v.duraiton} description={v.description}/>
             ))}
-          
           </div>
         </SectionLayout>
 
@@ -136,6 +135,15 @@ function App() {
           <div>
             {projectData.map((v)=>(
               <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task}/>
+            ))}
+          </div>
+        </SectionLayout>
+
+        {/* 스킬 */}
+        <SectionLayout title={"Skills"} id={"skills"} ref={el => sectionRefs.current.skills = el}>
+          <div>
+            {skillData.map((v, i)=>(
+              <SkillCard key={i} description={v.description} skills={v.skills}/>
             ))}
           </div>
         </SectionLayout>

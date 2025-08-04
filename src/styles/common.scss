@@ -111,15 +111,34 @@ main {
             }
           }
 
-          // 이력서 다운로드
-          > div:last-of-type {
-            display: flex;
+          // 사진 & 연락처
+          > div:nth-of-type(3) {
+            display: grid;
+            grid-template-columns: 1fr 7fr;
+            column-gap: 2rem;
             align-items: center;
-            column-gap: 0.7rem;
-            > span {
-              margin-bottom: 0.5rem;
+            > img {
+              width: 100%;
+            }
+            > div {
+              width: calc(100% - 2rem);
+              padding: 2rem;
+              box-sizing: border-box;
+              border: 1px solid white;
+              border-radius: 20px;
             }
           }
+
+
+          // 이력서 다운로드
+          // > div:last-of-type {
+          //   display: flex;
+          //   align-items: center;
+          //   column-gap: 0.7rem;
+          //   > span {
+          //     margin-bottom: 0.5rem;
+          //   }
+          // }
         }
       }
   }
@@ -170,6 +189,8 @@ main {
   box-sizing: border-box;
   > div {
       max-height: 100%;
+      // height: 100%;
+      height: fit-content;
       overflow: hidden;
       max-width: 1220px;
       margin: auto;
@@ -177,10 +198,12 @@ main {
       display: grid;
       grid-template-columns: 1fr 6fr;
       column-gap: 3em;
+      align-items: center;
       > div:first-of-type {
           padding-top: 2rem;
           text-align: right;
           white-space: nowrap;
+          align-self:baseline;
         }
         > div:last-of-type {
           width: 100%;

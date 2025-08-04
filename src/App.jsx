@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
+import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
 import { expData, projectData, skillData, slogan } from './constants/constants'
 import { MenuModal } from './components/menuModal'
@@ -98,8 +99,7 @@ function App() {
                 는 마음으로 개발자의 꿈을 꾸게 되었습니다.
               </div>
 
-              {`코딩하는 것이 즐거운 프론트엔드 개발자입니다.
-                일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다.
+              {`일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다.
                 또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
 
               <div>
@@ -109,9 +109,12 @@ function App() {
               </div>
 
               <div>
-                📞 010-8835-7380<br/>
-                ✉️ 12cometome@naver.com<br/>
-                🏠 서울 강남구 역삼동 거주<br/>
+                <img src={photo} alt='photo'/>
+                <div>
+                  📞 010-8835-7380<br/>
+                  ✉️ 12cometome@naver.com<br/>
+                  🏠 서울 강남구 역삼동 거주<br/>
+                </div>
               </div>
 
               {/* <div>

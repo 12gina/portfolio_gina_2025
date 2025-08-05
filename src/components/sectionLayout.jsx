@@ -4,9 +4,9 @@ export const SectionLayout = ({ref, id, title, children}) => {
         <section className={'section-layout'} ref={ref} id={id}>
           <div>
             <div>
-              {title}
+              <div>{title}</div>
+              {children}
             </div>
-            {children}
           </div>
         </section>
     )

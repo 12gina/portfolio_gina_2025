@@ -52,7 +52,7 @@ body {
 
 /* 스크롤바 핸들 (움직이는 부분) */
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2); /* 회색 반투명 */
+  background-color: rgba(129, 129, 129, 0.2); /* 회색 반투명 */
   border-radius: 10px;
 }
 
@@ -94,25 +94,25 @@ main {
       white-space: pre-line;
       // padding-bottom: 3rem;
       > div {
-        > div:last-of-type {
+        > div {
           line-height: 1.8;
           display: flex;
           flex-direction: column;
           row-gap: 2em;
-          padding: 0 1.5em;
+
           >.slogan > span {
             font-size: 3em;
           }
 
           // 자격증
-          > div:nth-of-type(2) {
+          > div:nth-of-type(3) {
             > span {
               color: var(--color-gray-50);
             }
           }
 
           // 사진 & 연락처
-          > div:nth-of-type(3) {
+          > div:nth-of-type(4) {
             display: grid;
             grid-template-columns: 1fr 7fr;
             column-gap: 2rem;
@@ -128,8 +128,6 @@ main {
               border-radius: 20px;
             }
           }
-
-
           // 이력서 다운로드
           // > div:last-of-type {
           //   display: flex;
@@ -146,6 +144,13 @@ main {
   // 경력
   > section:nth-of-type(3) {
     color: var(--color-black);
+    > div {
+      > div {
+        > div:first-of-type {
+          padding-top: 2.5rem;
+        }
+      }
+    }
   }
 
   // 프로젝트
@@ -153,13 +158,13 @@ main {
     color: var(--color-black);
     background-color: var(--color-yellow-dark);
     > div {
-      height: 100%;
-      max-height: fit-content;
-      > div:last-of-type {
-        width: 100%;
+      > div {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 3em;
+      }
+      > div:first-of-type {
+        padding-top: 1.5rem;
       }
     }
   }
@@ -169,7 +174,6 @@ main {
     color: var(--color-black);
     > div {
       > div:last-of-type {
-        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 2em;
@@ -188,29 +192,30 @@ main {
   padding: 6rem;
   box-sizing: border-box;
   > div {
+    max-height: fit-content;
+    height: 100%;
+    max-width: 1220px;
+    width: 100%;
+    margin: auto 0;
+    align-items: center;
+    > div {
+      width: calc(100% - 20%);
+      padding-left: 17%;
       max-height: 100%;
-      // height: 100%;
       height: fit-content;
-      overflow: hidden;
-      max-width: 1220px;
-      margin: auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 6fr;
-      column-gap: 3em;
-      align-items: center;
+      overflow-y: scroll;
+      position: relative;
       > div:first-of-type {
-          padding-top: 2rem;
-          text-align: right;
-          white-space: nowrap;
-          align-self:baseline;
-        }
-        > div:last-of-type {
-          width: 100%;
-          height: 100%;
-          overflow-y: scroll;
-        }
+        padding: 1.5rem 2% 0 0;
+        box-sizing: border-box;
+        text-align: right;
+        white-space: nowrap;
+        width: 17%;
+        position: absolute;
+        left: 0;
+      }
     }
+  }
 }
 
 video {

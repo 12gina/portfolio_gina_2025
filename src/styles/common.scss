@@ -92,22 +92,26 @@ main {
   > section:nth-of-type(2) {
       background-color: black;
       white-space: pre-line;
-      // padding-bottom: 3rem;
+      // font-size: 0.9em;
       > div {
         > div {
+          >.slogan {
+            margin-bottom: -2.2em;
+            > span {
+              font-size: 3em;
+            }
+          }
           line-height: 1.8;
           display: flex;
           flex-direction: column;
-          row-gap: 2em;
-
-          >.slogan > span {
-            font-size: 3em;
-          }
+          row-gap: 1.2em;
 
           // 자격증
           > div:nth-of-type(3) {
-            > span {
-              color: var(--color-gray-50);
+            > div{
+              > span {
+                color: var(--color-gray-50);
+              }
             }
           }
 
@@ -159,13 +163,24 @@ main {
     background-color: var(--color-yellow-dark);
     > div {
       > div {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 3em;
+        > div:nth-of-type(2){
+          display: grid;
+          grid-template-columns: 2fr 1fr 1fr;
+          width: 100%;
+          column-gap: 1.5em;
+        }
+        > div:nth-of-type(3), div:nth-of-type(4), div:nth-of-type(5){
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          width: 100%;
+          column-gap: 1.5em;
+          row-gap: 1.5em;
+          padding-top: 1.5em;
+        }
       }
-      > div:first-of-type {
-        padding-top: 1.5rem;
-      }
+      // > div:first-of-type {
+      //   padding-top: 1.5rem;
+      // }
     }
   }
 
@@ -173,7 +188,7 @@ main {
   > section:nth-of-type(5) {
     color: var(--color-black);
     > div {
-      > div:last-of-type {
+      > div {
         display: flex;
         flex-direction: column;
         gap: 2em;
@@ -187,7 +202,7 @@ main {
   width: 100%;
   height: 100vh;
   font-size: clamp(0.2vw, 1em, 1em);
-  display: flex;
+  display: flex;justify-content: center;
   overflow: hidden;
   padding: 6rem;
   box-sizing: border-box;
@@ -455,43 +470,81 @@ nav {
 
 
 .project-card {
-  padding-bottom: 2.5rem;
-  box-sizing: border-box;
   width: 100%;
-  height: 50rem;
+  height: 100%;
+  row-gap: 1.5em;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
-  line-height: 1.8;
-  gap: 0.8em;
-  white-space: pre-line;
-  > div:nth-of-type(1) {
+  .image {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    align-items: center;
+    position: relative;
     width: 100%;
-    height: 12em;
+    aspect-ratio: 2.1 / 1;
     overflow: hidden;
     border-radius: 8px;
     > img {
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
       object-fit: cover;
       width: 100%;
       height: 100%;
+      flex: 1;
+    }
+    &.mobile {
+      aspect-ratio: 1 / 1.9;
+    }
+    &.kiosk {
+      aspect-ratio: 1 / 1.55;
+    }
+    > div:last-of-type {
+      flex: 1;
+      color: white;
+      font-size: 1em;
+      grid-column: 1 / -1;
+      grid-row: 1 / -1;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.4rem;
+      padding: 9% 1rem;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0.6);
+      transform: translateY(17em);
+      transition: transform 0.3s ease;
+      > div:nth-of-type(2), div:nth-of-type(3) {
+        font-size: 0.7em;
+        &.wrap {
+          white-space: pre-line;
+        }
+      }
+      > div:last-of-type {
+        display: flex;
+        column-gap: 0.5rem;
+        width: 100%;
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+        align-items: baseline;
+        > img {
+          width: 2rem;
+          border-radius: 2px;
+        }
+      }
+    }
+    &:hover{
+      > div:last-of-type {
+        transform: translateY(0);
+      }
     }
   }
-  > div:nth-of-type(2) {
-    font-weight: 900;
-    font-size: 1.3em;
-  }
-  > div:last-of-type {
-    display: flex;
-    gap: 0.3em;
-    margin-top: 0.6em;
-    flex-wrap: wrap;
-    align-items: baseline;
-    > img {
-      background-color:cadetblue;
-      border-radius: 5px;
-      object-fit: contain;
-      width: 3.5rem;
-      aspect-ratio: 1 / 1;
-    }
+  .empty-block {
+    border-radius: 8px;
+    width: 100%;
+    flex-grow: 1;
+    background-color: var(--color-yellow-dark2);
+    cursor: default;
   }
 }
 
@@ -506,20 +559,40 @@ nav {
   line-height: 1.8;
   gap: 0.8em;
   white-space: pre-line;
-  > div:nth-of-type(1) {
-  }
   > div:last-of-type {
     display: flex;
     gap: 0.3em;
     margin-top: 0.6em;
     flex-wrap: wrap;
     align-items: baseline;
-    > img {
-      background-color:cadetblue;
-      border-radius: 5px;
-      object-fit: contain;
-      width: 3.5rem;
-      aspect-ratio: 1 / 1;
+    font-size: 0.6em;
+    > div {
+      position: relative;
+      > img {
+        background-color:cadetblue;
+        border-radius: 5px;
+        object-fit: contain;
+        width: 3.5rem;
+        aspect-ratio: 1 / 1;
+      }
+      > span {
+        position: absolute;
+        background-color: white;
+        border: 1px solid var(--color-gray-50);
+        border-radius: 5px;
+        padding: 0.1rem 0.2rem;
+        white-space: nowrap;
+        color: var(--color-gray-80);
+        z-index: 2;
+        left: 2rem;
+        top: -1rem;
+        opacity: 0;
+      }
+      &:hover{
+        > span {
+          opacity: 1;
+        }
+      }
     }
   }
 }

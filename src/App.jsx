@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
-import { expData, projectData, skillData, slogan } from './constants/constants'
+import { certiData, expData, projectData, skillData, slogan } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/MenuButton'
 import { SectionLayout } from './components/sectionLayout'
@@ -102,9 +102,11 @@ function App() {
             또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
 
           <div>
-            정보처리기사 <span>2024. 09 / 한국산업인력공단</span><br/>
-            2종보통운전면허 <span>2015. 12 / 경찰청(운전면허시험관리단)</span><br/>
-            ICDL ( International Computer Driving Licence) <span>2011. 07  (기본 office 활용 능력 인증 자격)</span>
+            {certiData.map((v)=>(
+              <div key={v.title}>
+                {v.title} <span key={v.title}>{v.date} / {v.authority}</span><br/>
+              </div>
+            ))}
           </div>
 
           <div>
@@ -131,9 +133,16 @@ function App() {
 
         {/* 프로젝트 */}
         <SectionLayout title={"Projects"} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          {projectData.map((v)=>(
-            <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task}/>
-          ))}
+          <div>
+            {projectData.slice(0,3).map((v,i)=>(
+              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
+            ))}
+          </div>
+          <div>
+            {projectData.slice(3, projectData.length).map((v,i)=>(
+              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={10}/>
+            ))}
+          </div>
         </SectionLayout>
 
         {/* 스킬 */}

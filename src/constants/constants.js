@@ -40,6 +40,12 @@ export const title = ['성', '실', '함', '과', ' ', '학', '습', '능', '력
 
 export const slogan = ['하', '고', '싶', '은', ' ', '것', '을', ' ', '하', '자']
 
+export const certiData= [
+    {title:"정보처리기사", date: "2024. 09", authority:"한국산업인력공단"},
+    {title:"2종보통운전면허", date: "2015. 12", authority:"경찰청(운전면허시험관리단)"},
+    {title:"공인중개사", date: "2015. 12", authority:"한국산업인력공단"},
+    {title:"ICDL", date: "2011. 07", authority:"한국생산성본부 (MS office 활용 능력 인증 자격)"},
+]
 
 export const expData = [
     {company:"엔조이소프트", department:"기술연구소", duraiton:"2025.03-2025.07", description:"- React JS, Electron JS 등을 활용한 키오스크 앱, 관리자 웹 유지보수 및 신규 기능 개발\n- Next JS를 활용한 신원인증 앱 개발"},
@@ -48,23 +54,25 @@ export const expData = [
 ]
 
 export const projectData = [
-    {image: img10, title:"이음프로퍼티 홈페이지", description:"회사(자산관리사) 홈페이지", task:"· 홈페이지 기획, 디자인, 전체 구현", skills:[sk_react, sk_vite, sk_gsap, sk_sass]},
-    {image: img9, title:"키업 신원인증 앱", description:"앱카드 인증을 통한 신원인증 기능 지원 웹앱", task:"· 신규 앱 구현", skills:[sk_next, sk_typescript, sk_zustand, sk_gsap, sk_sass]},
-    {image: img8, title:"키업패스 앱", description:"무인매장 운영을 위한 출입인증 기능 지원 키오스크 앱", task:"· 전체 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(앱카드 인증 기능 등) 구현", skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_socket, sk_sass, sk_pm2]},
-    {image: img7, title:"키업패스 관리자웹", description:"출입인증 앱 관리자 사이트", task:"· 전체 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(키오스크 스크린 모니터링 등) 구현", skills:[sk_react, sk_typescript, sk_zustand, sk_tailwind, sk_socket, sk_sass, sk_pm2]},
-    {image: img5, title:"시즌마켓(도매)", description:"제주 특산 농수산물 및 김치 도매 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_react, sk_sass,]},
-    {image: img4, title:"시즌마켓(소매)", description:"제주 특산 농수산물 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_next, sk_typescript, sk_sass]},
-    {image: img3, title:"프로지스트 홈페이지", description:"회사(IT, 웹/플랫폼 개발사) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap]},
-    {image: img2, title:"만쿠무역 ERP 앱", description:"회사(무역) ERP 앱", task:"· 신규 앱 프론트 구현", skills:[sk_electron, sk_sass, sk_gsap]},
-    {image: img1, title:"만쿠무역 홈페이지", description:"회사(무역) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap]},
-    {image: img0, title:"Gimunity / medibot", description:"국비지원교육 프로젝트", task:"구글 드라이브 문서 참고", skills:[sk_python, sk_react, sk_redux, sk_mysql, sk_java]},
+    {image: img10, device: "", title:"이음프로퍼티 홈페이지", description:"회사(자산관리사) 홈페이지", task:"· 홈페이지 기획, 디자인, 전체 구현", skills:[sk_react, sk_vite, sk_gsap, sk_sass]},
+    {image: img9, device: "mobile", title:"키업 신원인증 앱", description:"앱카드 인증을 통한 신원인증 기능 지원 웹앱", task:"· 신규 앱 구현", skills:[sk_next, sk_typescript, sk_zustand, sk_gsap, sk_sass]},
+    {image: img8, device: "kiosk", title:"키업패스 앱", description:"무인매장 운영을 위한 출입인증 기능 지원 키오스크 앱", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(앱카드 인증 기능 등) 구현", skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_socket, sk_sass, sk_pm2]},
+    {image: img7, device: "", title:"키업패스 관리자웹", description:"출입인증 앱 관리자 사이트", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(키오스크 스크린 모니터링 등) 구현", skills:[sk_react, sk_typescript, sk_zustand, sk_tailwind, sk_socket, sk_sass, sk_pm2]},
+    {image: img5, device: "", title:"시즌마켓(도매)", description:"제주 특산 농수산물 및 김치 도매 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_react, sk_sass,], href:"https://jazzy-sugar-dbf.notion.site/17ac230239808132b464ceb9b610416b"},
+    {image: img4, device: "", title:"시즌마켓(소매)", description:"제주 특산 농수산물 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_next, sk_typescript, sk_sass], href:"https://jazzy-sugar-dbf.notion.site/17ac23023980815390b2d6f8e490dc87"},
+    {image: "", device: "", title:"", description:"", task:"", skills:[]},
+    {image: img3, device: "", title:"프로지스트 홈페이지", description:"회사(IT, 웹/플랫폼 개발사) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac23023980813ea5ffc29ccea48d80"},
+    {image: img2, device: "", title:"만쿠무역 ERP 앱", description:"회사(무역) ERP 앱", task:"· 신규 앱 프론트 구현", skills:[sk_electron, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac2302398081f9aaaaf40bc8417830"},
+    {image: img1, device: "", title:"만쿠무역 홈페이지", description:"회사(무역) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac2302398081f1ab30db323f57fc3a"},
+    {image: img0, device: "", title:"Gimunity / medibot", description:"국비지원교육 프로젝트", task:"구글 드라이브 문서 참고", skills:[sk_python, sk_react, sk_redux, sk_mysql, sk_java], href:"https://drive.google.com/file/d/18AePbZcXtHWM3nxMcX4ZF2m3AUGynmzV/view?pli=1"},
 ]
 
 export const skillData = [
     {description: "능숙하게 사용할 수 있습니다.",
-        skills:[sk_react, sk_sass,]},
-    {description: "기본적인 기능을 적절하게 활용할 수 있습니다.",
-        skills:[sk_electron, sk_express, sk_next, sk_vite, sk_typescript, sk_java, sk_zustand, sk_socket, sk_tailwind, sk_antd, sk_gsap, sk_python, sk_mysql]},
+        skills:[{src:sk_react, tip:"React JS"}, {src:sk_sass, tip:"Sass"}]},
+    {description: "주요 기능을 적절하게 활용할 수 있습니다.",
+        skills:[{src:sk_electron, tip:"Electron JS"}, {src:sk_express, tip:"express"}, {src:sk_next, tip:"Next JS"}, {src:sk_vite, tip:"Vite"}, {src:sk_typescript, tip:"Typescript"}, {src:sk_java, tip:"Java"},
+            {src:sk_zustand, tip:"Zustand"}, {src:sk_socket, tip:"Socket"}, {src:sk_tailwind, tip:"Tailwind"}, {src:sk_antd, tip:"Antd"}, {src:sk_gsap, tip:"GSAP"}, {src:sk_python, tip:"Python"}, {src:sk_mysql, tip:"Mysql"}]},
     {description: "사용해본 경험이 있습니다.",
-        skills:[sk_pm2, sk_redux]},
+        skills:[{src:sk_pm2, tip:"PM2"}, {src:sk_redux, tip:"Redux"}]},
 ]

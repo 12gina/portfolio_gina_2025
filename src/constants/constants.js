@@ -38,7 +38,7 @@ export const menuList = [
 export const title = ['성', '실', '함', '과', ' ', '학', '습', '능', '력', '을', ' ', '갖', '춘', '\n',
     '프', '론', '트', '엔', '드', '  ', '개', '발', '자', " ", '김', '진', '화', ' ', 'v', 'e', 'r', '.', '2', '0', '2', '5']
 
-export const slogan = ['하', '고', '싶', '은', ' ', '것', '을', ' ', '하', '자']
+export const slogan = ['하', '고', '싶', '은', '\u00A0', '것', '을', '\u00A0', '하', '자']
 
 export const certiData= [
     {title:"정보처리기사", date: "2024. 09", authority:"한국산업인력공단"},
@@ -48,16 +48,16 @@ export const certiData= [
 ]
 
 export const expData = [
-    {company:"엔조이소프트", department:"기술연구소", duraiton:"2025.03-2025.07", description:"- React JS, Electron JS 등을 활용한 키오스크 앱, 관리자 웹 유지보수 및 신규 기능 개발\n- Next JS를 활용한 신원인증 앱 개발"},
+    {company:"엔조이소프트", department:"기술연구소", duraiton:"2025.03-2025.07", description:"- React, Electron 등을 활용한 키오스크 앱, 관리자 웹 유지보수 및 신규 기능 개발\n- Next JS를 활용한 신원인증 앱 개발"},
     {company:"프로지스트", department:"개발팀", duraiton:"2024.08-2025.02", description:"- React, Next, Electron 등을 활용한 웹 Front end 개발\n- 쇼핑몰, 홈페이지, ERP등 개발 참여\n- 고객사 파견 경험 有"},
     {company:"웹서비스 풀스텍 개발\n(교육)", department:"이젠아카데미강남점", duraiton:"2023.11-2024.05", description:"- Java, Python을 활용한 AI 챗봇 개발\n- DBMS MySQL 데이터베이스 구축\n- Spring Boot Framework 활용 등"},
 ]
 
 export const projectData = [
-    {image: img10, device: "", title:"이음프로퍼티 홈페이지", description:"회사(자산관리사) 홈페이지", task:"· 홈페이지 기획, 디자인, 전체 구현", skills:[sk_react, sk_vite, sk_gsap, sk_sass]},
-    {image: img9, device: "mobile", title:"키업 신원인증 앱", description:"앱카드 인증을 통한 신원인증 기능 지원 웹앱", task:"· 신규 앱 구현", skills:[sk_next, sk_typescript, sk_zustand, sk_gsap, sk_sass]},
-    {image: img8, device: "kiosk", title:"키업패스 앱", description:"무인매장 운영을 위한 출입인증 기능 지원 키오스크 앱", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(앱카드 인증 기능 등) 구현", skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_socket, sk_sass, sk_pm2]},
-    {image: img7, device: "", title:"키업패스 관리자웹", description:"출입인증 앱 관리자 사이트", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(키오스크 스크린 모니터링 등) 구현", skills:[sk_react, sk_typescript, sk_zustand, sk_tailwind, sk_socket, sk_sass, sk_pm2]},
+    {image: img10, device: "", title:"이음프로퍼티 홈페이지", description:"회사(부동산 컨설팅) 홈페이지", task:"· 홈페이지 기획, 디자인, 전체 구현", skills:[sk_react, sk_vite, sk_gsap, sk_sass], href:"https://jazzy-sugar-dbf.notion.site/247c230239808008b9aac5668498f673"},
+    {image: img9, device: "mobile", title:"키업 신원인증 앱", description:"앱카드 인증을 통한 신원인증 기능 지원 웹앱", task:"· 신규 앱 구현", skills:[sk_next, sk_typescript, sk_zustand, sk_gsap, sk_sass], href:"https://jazzy-sugar-dbf.notion.site/247c23023980807f9bc5d2ce4663ca59"},
+    {image: img8, device: "kiosk", title:"키업패스 앱", description:"무인매장 운영을 위한 출입인증 기능 지원 키오스크 앱", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(앱카드 인증 기능 등) 구현", skills:[sk_react, sk_electron, sk_express, sk_typescript, sk_zustand, sk_socket, sk_sass, sk_pm2], href:"https://jazzy-sugar-dbf.notion.site/247c2302398080fda07ce96e488bafa3"},
+    {image: img7, device: "", title:"키업패스 관리자웹", description:"출입인증 앱 관리자 사이트", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(키오스크 스크린 모니터링 등) 구현", skills:[sk_react, sk_typescript, sk_zustand, sk_tailwind, sk_socket, sk_sass, sk_pm2], href: "https://jazzy-sugar-dbf.notion.site/247c2302398080e7b669cce8fbf881cb"},
     {image: img5, device: "", title:"시즌마켓(도매)", description:"제주 특산 농수산물 및 김치 도매 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_react, sk_sass,], href:"https://jazzy-sugar-dbf.notion.site/17ac230239808132b464ceb9b610416b"},
     {image: img4, device: "", title:"시즌마켓(소매)", description:"제주 특산 농수산물 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_next, sk_typescript, sk_sass], href:"https://jazzy-sugar-dbf.notion.site/17ac23023980815390b2d6f8e490dc87"},
     {image: "", device: "", title:"", description:"", task:"", skills:[]},

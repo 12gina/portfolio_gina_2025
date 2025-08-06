@@ -69,6 +69,7 @@ main {
   height: auto;
   color: white;
   overflow-x: hidden;
+
   // 타이틀
   > section:nth-of-type(1) {
     position: relative;
@@ -77,14 +78,31 @@ main {
     justify-content: center;
     align-items: center;
     > div {
+      width: fit-content;
+      height: fit-content;
+      line-height: 1.5;
       position: absolute;
       z-index: 1;
       color: white;
       text-align: center;
       white-space: pre-line;
-      font-size: clamp(0.35vw, 3.5vw, 35rem);
+      font-size: clamp(0.4vw, 4vw, 40rem);
       font-weight: 900;
       text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.7);
+      > div:nth-of-type(1) {
+        transform: translateX(-80rem);
+      }
+      > div:nth-of-type(2) {
+        transform: translateX(80rem);
+        > span {
+          > span:nth-of-type(1) {
+            font-size: clamp(0.5vw, 5vw, 50rem);
+          }
+          > span:nth-of-type(2) {
+            font-size: clamp(0.2vw, 2vw, 20rem);
+          }
+        }
+      }
     }
   }
 
@@ -95,10 +113,18 @@ main {
       // font-size: 0.9em;
       > div {
         > div {
-          >.slogan {
-            margin-bottom: -2.2em;
-            > span {
-              font-size: 3em;
+          > div {
+            >.slogan {
+              margin-bottom: -2.2em;
+              overflow: hidden;
+              display: inline-block;
+              > span {
+                font-size: 3em;
+                > span {
+                  display: inline-block;
+                  transform: translateY(-100%);
+                }
+              }
             }
           }
           line-height: 1.8;
@@ -122,6 +148,7 @@ main {
             column-gap: 2rem;
             align-items: center;
             > img {
+              scale: 0;
               width: 100%;
             }
             > div {
@@ -130,6 +157,9 @@ main {
               box-sizing: border-box;
               border: 1px solid white;
               border-radius: 20px;
+              > span {
+                color: var(--color-gray-50);
+              }
             }
           }
           // 이력서 다운로드
@@ -168,6 +198,7 @@ main {
           grid-template-columns: 2fr 1fr 1fr;
           width: 100%;
           column-gap: 1.5em;
+          transform: translateX(100%);
         }
         > div:nth-of-type(3), div:nth-of-type(4), div:nth-of-type(5){
           display: grid;
@@ -176,6 +207,7 @@ main {
           column-gap: 1.5em;
           row-gap: 1.5em;
           padding-top: 1.5em;
+          transform: translateX(100%);
         }
       }
       // > div:first-of-type {
@@ -356,6 +388,7 @@ nav {
   row-gap: 2rem;
   position: fixed;
   z-index: 101;
+  scale: 0.1;
   > span {
     background-color: black;
   }
@@ -458,6 +491,8 @@ nav {
   padding: 1.5em;
   box-sizing: border-box;
   line-height: 1.8;
+  transform: translateY(100%);
+  opacity: 0;
   > div:first-of-type {
     > span {
       color: var(--color-gray-50);
@@ -568,6 +603,8 @@ nav {
     font-size: 0.6em;
     > div {
       position: relative;
+      opacity: 0;
+      scale: 0.5;
       > img {
         background-color:cadetblue;
         border-radius: 5px;

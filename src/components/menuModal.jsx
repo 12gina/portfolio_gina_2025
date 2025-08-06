@@ -55,7 +55,7 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
                         <span>Kim Jinhwa</span>
                         <span onClick={()=>copyText("010-8835-7380")}>010.8835.7380</span>
                         <span onClick={()=>copyText("cometome1212@gmail.com")}>cometome1212@gmail.com</span>
-                        <a href="" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
+                        <a href="https://github.com/12gina/portfolio" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
                     </div>
                 </div>
             </nav>

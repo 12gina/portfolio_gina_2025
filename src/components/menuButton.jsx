@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const MenuButton = ({className="",isMenuButtonOn, onClick, sectionRefs}) => {
+export const MenuButton = ({isMenuButtonOn, onClick, sectionRefs}) => {
     const menuRef1=useRef(null);
     const menuRef2=useRef(null);
     const menuRef3=useRef(null);
@@ -30,7 +30,7 @@ export const MenuButton = ({className="",isMenuButtonOn, onClick, sectionRefs}) 
     }, []);
 
     return (
-        <article className={`menu-button ${className} ${isMenuButtonOn? "on":""}`} onClick={onClick} >
+        <article className={`menu-button ${isMenuButtonOn? "on":""}`} onClick={onClick} >
             <span ref={menuRef1} />
             <span ref={menuRef2}/>
             <span ref={menuRef3}/>

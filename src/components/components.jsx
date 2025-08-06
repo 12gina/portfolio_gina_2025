@@ -35,8 +35,8 @@ export const CircularText = ({className}) => (
     </svg>
 );
 
-export const ExpCard = ({company, department, duration, description}) => (
-    <article className='exp-card'>
+export const ExpCard = ({company, idx, department, duration, description}) => (
+    <article className='exp-card' id={`exp-card_${idx}`}>
         <div>
         {company}<br/>
         <span>
@@ -51,7 +51,7 @@ export const ExpCard = ({company, department, duration, description}) => (
 )
 
 export const ProjectCard = ({title, image, skills, description, idx=0, href, task, device=""}) => (
-    <article className={`project-card`}>
+    <article className={`project-card`} id={`project-card_${idx}`}>
         {idx===0 && <div className="empty-block"/>}
         <a className={`${image? "image":"empty-block"} ${device}`} href={href} target="_blank" rel="noopener noreferrer">
             {image && <img src={image} alt="image"/>}
@@ -68,11 +68,11 @@ export const ProjectCard = ({title, image, skills, description, idx=0, href, tas
     </article>
 )
 
-export const SkillCard = ({skills, description}) => (
+export const SkillCard = ({skills, description, idx}) => (
     <article className='skill-card'>
         <div>{description}</div>
         <div>{skills.map((v, i)=>(
-            <div key={i}>
+            <div key={i} id={`skill_${idx}_${i}`}>
                 <img src={v.src} alt="skill icon"/>
                 <span>{v.tip}</span>
             </div>))}

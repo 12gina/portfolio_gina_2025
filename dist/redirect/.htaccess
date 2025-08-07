@@ -1,0 +1,7 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTP_HOST} ^xn--2o2b56yod030c8tah5e\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.xn--2o2b56yod030c8tah5e\.com$ [NC]
+  RewriteRule ^(.*)$ https://eumproperty.co.kr/$1 [R=301,L]
+</IfModule>

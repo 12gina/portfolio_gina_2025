@@ -10,6 +10,7 @@ import { ExpCard, ProjectCard, SkillCard } from './components/components'
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { Loading } from './components/loading'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,7 +19,8 @@ function App() {
     const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
     const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
     const [currentSection, setCurrentSection] = useState("aboutMe");
-    
+    const [isLoaded, setIsLoaded] = useState(false);
+
     const modalOpenTimerRef = useRef(null);
     const navOnTimerRef = useRef(null);
     const sectionRefs = useRef({
@@ -159,7 +161,7 @@ function App() {
 
         {/* 타이틀 */}
         <section>
-          <video id={'intro-video'} autoPlay muted loop playsInline>
+          <video onCanPlayThrough={()=>setIsLoaded(true)} id={'intro-video'} autoPlay muted loop playsInline>
             <source
                 src={introVideo}
                 type="video/mp4"/>
@@ -241,6 +243,7 @@ function App() {
 
       </main>
 
+      <Loading isLoaded={isLoaded}/>
       <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
       <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection} setCurrentSection={setCurrentSection}/>
 

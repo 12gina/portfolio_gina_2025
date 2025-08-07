@@ -754,3 +754,31 @@ nav {
     opacity: 0;
   }
 }
+
+.loading {
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  display: grid;
+  font-size: 3rem;
+  font-weight: 700;
+  transition: opacity 0.3s ease;
+  color: var(--color-yellow-dark);
+  > * {
+    margin: auto;
+    grid-column: 1 / sapn 1;
+    grid-row: 1 / sapn 1;
+  }
+  > img {
+    width: 30rem;
+    animation: spin 3s linear infinite;;
+  }
+  &.off {
+    opacity: 0;
+    z-index: -1;
+  }
+}

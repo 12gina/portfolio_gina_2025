@@ -20,6 +20,7 @@ function App() {
     const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
     const [currentSection, setCurrentSection] = useState("aboutMe");
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isMobile, setIsMobile] = useState(false);
 
     const modalOpenTimerRef = useRef(null);
     const navOnTimerRef = useRef(null);
@@ -126,6 +127,16 @@ function App() {
     
     useEffect(()=>{
       window.scrollTo(0, 0);
+      
+      const handleResize = () => {
+        if (window.innerWidth <= 480) {
+          setIsMobile(true);
+        } else {
+          setIsMobile(false);
+        }
+      };
+
+      handleResize();
 
       const handleScroll = () => {
 
@@ -145,14 +156,17 @@ function App() {
           setCurrentSection(sectionRefs.current.projects.id)
         }
       }
+
       window.addEventListener('scroll', handleScroll)
+      window.addEventListener("resize", handleResize);
 
       return ()=>{
           clearTimeout(modalOpenTimerRef);
           clearTimeout(navOnTimerRef);
-          // window.removeEventListener('resize', handleResize);
+          window.removeEventListener('resize', handleResize);
           window.removeEventListener('scroll', handleScroll);
       }
+
     }, [])
 
   return (
@@ -168,10 +182,10 @@ function App() {
           </video>
           <div>
             <div id={"title1"}>
-              <span>성실함과 학습능력을 갖춘</span>
+              <span>성실함과 학습능력을 {isMobile && <br/>} 갖춘</span>
             </div>
             <div id={"title2"}>
-              <span>프론트엔드 개발자 <span>김진화</span> <span>ver.2025</span></span>
+              <span>프론트엔드 개발자 {isMobile && <br/>}<span>김진화</span> <span>ver.2025</span></span>
             </div>
           </div>
         </section>

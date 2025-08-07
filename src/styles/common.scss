@@ -339,7 +339,7 @@ nav {
         font-size: clamp( 0.1vw, 2.6vw, 2.6em);
         letter-spacing: -1px;
       }
-      > span, a {
+      > span, div {
         opacity: 0.7;
         transition: opacity 0.3s ease;
         &:hover {
@@ -352,6 +352,16 @@ nav {
         cursor:default;
         &:hover {
           opacity: 1;
+        }
+      }
+      > div {
+        display: flex;
+        column-gap: 1.5vw;
+        align-items: center;
+        > a > img {
+          width: 3.4vw;
+          opacity: 0.8;
+          margin-top: 0.5vw;
         }
       }
     }
@@ -377,8 +387,12 @@ nav {
         }
       }
       > div {
-        > span, a {
+        > span, div {
           padding: 0.5rem 0;
+        }
+        > div > a > img {
+          margin-top: 0.8rem !important;
+          width: 3rem !important;
         }
       }
     }

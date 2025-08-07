@@ -3,6 +3,7 @@ import { menuList } from "../constants/constants";
 import { MouseTracker } from "./MouseTracker";
 import { GithubOutlined, MailOutlined } from "@ant-design/icons";
 import { Alert } from "./components";
+import tstory from "../assets/images/icon_tstory.png"
 
 export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, currentSection, setCurrentSection}) => {
 
@@ -55,7 +56,10 @@ export const MenuModal = ({sectionRefs, isMenuModalOpen, setIsMenuModalOpen, cur
                         <span>Kim Jinhwa</span>
                         <span onClick={()=>copyText("010-8835-7380")}>010.8835.7380</span>
                         <span onClick={()=>copyText("cometome1212@gmail.com")}>cometome1212@gmail.com</span>
-                        <a href="https://github.com/12gina/portfolio_gina_2025" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
+                        <div>
+                            <a href="https://github.com/12gina/portfolio_gina_2025" target="_blank" rel="noopener noreferrer" ><GithubOutlined /></a>
+                            <a href="https://vamosdev12.tistory.com/" target="_blank" rel="noopener noreferrer" ><img src={tstory} alt="tstory"/></a>
+                        </div>
                     </div>
                 </div>
             </nav>

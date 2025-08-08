@@ -32,7 +32,7 @@ function App() {
     });
 
     useGSAP(()=>{
-      
+
       if (!isLoaded) return;
       
       let tl = gsap.timeline({
@@ -56,21 +56,24 @@ function App() {
       .to('#hr2', {duration: 0.5, x: 0, ease: "power2.out" }, "<")
       .to('.menu-button', {duration: 0.3, opacity: 1, ease: "power2.out" }, ">0.1")
 
-      tl.play();
 
-      // ScrollTrigger.create({
-      //   animation: tl,
-      //   trigger: "#title",
-      //   start: "top top",
-      //   end: "+=300%",
-      //   // pin: true,
-      //   // pinSpacing: true,
-      //   // pinReparent: true,
-      //   onEnter: ()=>tl.play(),
-      //   toggleActions: 'restart none restart none',
-      //   scrub: false,
-      //   invalidateOnRefresh: true,
-      // },);
+      let tl2 = gsap.timeline({})
+
+
+      ScrollTrigger.create({
+        animation: tl,
+        trigger: "#page",
+        start: "top top",
+        end: "+=80%",
+        pin: true,
+        pinSpacing: true,
+        pinReparent: true,
+        // onEnter: ()=>tl.play(),
+        // toggleActions: 'restart none restart none',
+        // scrub: false,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      },);
 
     },[isLoaded])
 
@@ -115,44 +118,40 @@ function App() {
         trigger: "#aboutMe",
         start: "top top",
         end: "+=150%",
-        pin: true,
-        pinSpacing: true,
-        pinReparent: true,
-        scrub: 1,
         toggleActions: 'restart none restart none',
         onEnter: () => tl2.play(),
         invalidateOnRefresh: true,
       },);
 
-      // ScrollTrigger.create({
-      //   animation: tl3,
-      //   trigger: "#experiences",
-      //   start: "topc center",
-      //   end: "center center",
-      //   scrub: 1,
-      //   toggleActions: 'restart none restart none',
-      //   onEnter: () => tl3.restart(),
-      //   invalidateOnRefresh: true,
-      //   // markers: true
-      // },);
+      ScrollTrigger.create({
+        animation: tl3,
+        trigger: "#experiences",
+        start: "topc center",
+        end: "center center",
+        scrub: 1,
+        toggleActions: 'restart none restart none',
+        onEnter: () => tl3.restart(),
+        invalidateOnRefresh: true,
+        // markers: true
+      },);
 
-      // ScrollTrigger.create({
-      //   animation: tl4,
-      //   trigger: "#projects",
-      //   start: "top +=60%",
-      //   toggleActions: 'restart none restart none',
-      //   onEnter: () => tl4.play(),
-      //   invalidateOnRefresh: true,
-      // },);
+      ScrollTrigger.create({
+        animation: tl4,
+        trigger: "#projects",
+        start: "top +=60%",
+        toggleActions: 'restart none restart none',
+        onEnter: () => tl4.play(),
+        invalidateOnRefresh: true,
+      },);
 
-      // ScrollTrigger.create({
-      //   animation: tl5,
-      //   trigger: "#skills",
-      //   start: "top center",
-      //   toggleActions: 'restart none restart none',
-      //   onEnter: () => tl5.play(),
-      //   invalidateOnRefresh: true,
-      // },);
+      ScrollTrigger.create({
+        animation: tl5,
+        trigger: "#skills",
+        start: "top center",
+        toggleActions: 'restart none restart none',
+        onEnter: () => tl5.play(),
+        invalidateOnRefresh: true,
+      },);
 
     },[])
 
@@ -215,7 +214,7 @@ function App() {
 
   return (
     <>
-      <main>
+      <main id={"page"}>
 
         {/* 타이틀 */}
         <section id={"title"}>
@@ -249,9 +248,9 @@ function App() {
         <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
           <div>
             <span className='slogan'>
-              {/* <span>{slogan.map((v, i)=>(
+              <span>{slogan.map((v, i)=>(
                 <span key={i} id={`char_${i}`}>{v}</span>
-              ))}</span> */}
+              ))}</span>
             </span> 는 마음으로 개발자의 꿈을 꾸게 되었습니다.
           </div>
 
@@ -275,11 +274,6 @@ function App() {
               🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
             </div>
           </div>
-
-          {/* <div>
-            이력서 다운로드
-            <DownloadOutlined style={{fontSize:22}}/>
-          </div> */}
         </SectionLayout>
         
         {/* 경력 */}

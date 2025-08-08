@@ -8,10 +8,6 @@ html {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 0;
-  padding: 0;
-  height: auto;
-  width: 100vw;
 }
 
 a {
@@ -61,24 +57,22 @@ body {
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-main {
-  // display: flex;
-  // flex-direction: column;
+ main {
+  width: 100vw;
   color: grey;
   overflow-x: hidden;
 
   // 타이틀
-  > #title{
+  > #title {
     height: 100vh;
     width: 100%;
-    display: grid;
-    align-items: center;
-    justify-content: center;
+    display: flex;
+    place-items: center;
+    position: relative; 
+    overflow: clip;   
     > div {
       width: 100%;
       line-height: 1.5;
-      grid-column: 1 / 1;
-      grid-row: 1 / 1;
       color: white;
       text-align: center;
       white-space: pre-line;
@@ -92,6 +86,7 @@ main {
         > span {
           display: block;
         }
+
         &:nth-of-type(1) {
           > span {
             transform: translateY(-70%);
@@ -313,10 +308,9 @@ main {
 video {
   height: 100%;
   width: 100%;
-  grid-column: 1 / 1;
-  grid-row: 1 / 1;
+  position: absolute;
+  inset: 0; // top, right, bottom, left 전부 0
   object-fit: cover;
-  z-index: -1;
 }
 
 // 메뉴 모달

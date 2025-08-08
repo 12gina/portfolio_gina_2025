@@ -56,15 +56,11 @@ function App() {
       .to('#hr2', {duration: 0.5, x: 0, ease: "power2.out" }, "<")
       .to('.menu-button', {duration: 0.3, opacity: 1, ease: "power2.out" }, ">0.1")
 
-
-      let tl2 = gsap.timeline({})
-
-
       ScrollTrigger.create({
         animation: tl,
         trigger: "#page",
         start: "top top",
-        end: "+=80%",
+        end: "+=100%",
         pin: true,
         pinSpacing: true,
         pinReparent: true,
@@ -75,18 +71,24 @@ function App() {
         invalidateOnRefresh: true,
       },);
 
+      ScrollTrigger.create({
+        trigger: "#page",
+        start: "top top",
+        end: "bottom bottom",
+        snap: {
+          snapTo: 1 / 4,      // 구간 비율 (예: 섹션 4개면 1/4)
+          duration: 0.3,      // 스냅 애니메이션 시간(초)
+          delay: 0,           // 스냅 전 대기시간
+          ease: "power1.inOut"
+        }
+      })
+
     },[isLoaded])
 
     useGSAP(()=>{
 
-      let tl2 = gsap.timeline();
-      // slogan.forEach((_, i)=>{
-      //   tl2.to(
-      //     `#char_${i}`,
-      //     { duration: 0.3, y: 0, ease: "power2.out" },
-      //       i === 0 ? undefined : "<0.07")
-      // })
-      tl2.to("#photo", {duration: 0.5,  scale: 1, rotate:360, ease: "power2.out"}, "<0.2")
+      // let tl2 = gsap.timeline();
+      // tl2.to("#photo", {duration: 0.5,  scale: 1, rotate:360, ease: "power2.out"}, "<0.2")
 
       let tl3 = gsap.timeline();
       expData.forEach((_, i)=>{
@@ -113,15 +115,15 @@ function App() {
         })
       })
       
-      ScrollTrigger.create({
-        animation: tl2,
-        trigger: "#aboutMe",
-        start: "top top",
-        end: "+=150%",
-        toggleActions: 'restart none restart none',
-        onEnter: () => tl2.play(),
-        invalidateOnRefresh: true,
-      },);
+      // ScrollTrigger.create({
+      //   animation: tl2,
+      //   trigger: "#aboutMe",
+      //   start: "top top",
+      //   end: "+=150%",
+      //   toggleActions: 'restart none restart none',
+      //   onEnter: () => tl2.play(),
+      //   invalidateOnRefresh: true,
+      // },);
 
       ScrollTrigger.create({
         animation: tl3,

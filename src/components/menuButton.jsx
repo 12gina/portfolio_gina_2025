@@ -1,6 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export const MenuButton = ({isMenuButtonOn, onClick, sectionRefs}) => {
+    
     const menuRef1=useRef(null);
     const menuRef2=useRef(null);
     const menuRef3=useRef(null);
@@ -13,15 +14,14 @@ export const MenuButton = ({isMenuButtonOn, onClick, sectionRefs}) => {
             const aboutMeTop = sectionRefs.current.aboutMe?.getBoundingClientRect().top;
             const aboutMeBottom = sectionRefs.current.aboutMe?.getBoundingClientRect().bottom;
 
-                if (aboutMeTop <= 0 && aboutMeBottom > 0) {
-                    menuRef1.current.style.backgroundColor = 'white';
-                    menuRef2.current.style.backgroundColor = 'white';
-                    menuRef3.current.style.backgroundColor = 'white';
-                } else {
-                    menuRef1.current.style.backgroundColor = 'black';
-                    menuRef2.current.style.backgroundColor = 'black';
-                    menuRef3.current.style.backgroundColor = 'black';
-                }
+            // if (aboutMeTop <= 0 && aboutMeBottom > 0) {
+            //     menuRef1.current.style.backgroundColor = 'white';
+            //     menuRef2.current.style.backgroundColor = 'white';
+            //     menuRef3.current.style.backgroundColor = 'white';
+            // } else {
+            //     menuRef1.current.style.backgroundColor = 'black';
+            //     menuRef2.current.style.backgroundColor = 'black';
+            //     menuRef3.current.style.backgroundColor = 'black';
             // }
         };
 

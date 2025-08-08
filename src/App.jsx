@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
-import { certiData, expData, projectData, skillData, slogan } from './constants/constants'
+import { certiData, expData, projectData, skillData, slogan, title1, title2 } from './constants/constants'
 import { MenuModal } from './components/menuModal'
-import { MenuButton } from './components/MenuButton'
+import { MenuButton } from './components/menuButton'
 import { SectionLayout } from './components/sectionLayout'
 import { ExpCard, ProjectCard, SkillCard } from './components/components'
 import { useGSAP } from "@gsap/react";
@@ -32,19 +32,57 @@ function App() {
     });
 
     useGSAP(()=>{
-      let tl = gsap.timeline();
-        tl.to('#title1', {duration: 0.3,  x: 0, ease: "power2.out"})
-        .to('#title2', {duration: 0.3,  x: 0, ease: "power2.out" }, "<0.3") 
-        .to('.menu-button', {duration: 0.3, scale: 2.5, ease: "power2.out" }, "<0.3") 
-        .to('.menu-button', {duration: 0.3, scale: 1, ease: "power2.out" }, "<0.3")
+      
+      if (!isLoaded) return;
+      
+      let tl = gsap.timeline({
+        paused: true,
+      });
+
+      title1.forEach((_, i)=>{
+        tl.to(
+          `#char1_${i}`,
+          { duration: 0.5, y: 0, scale: 1, opacity: 1, ease: "power2.out" },
+            i === 0 ? undefined : "<0.1")
+      })
+      title2.forEach((_, i)=>{
+        tl.to(
+          `#char2_${i}`,
+          { duration: 0.5, y: 0, scale: 1, opacity: 1, ease: "power2.out" },
+            i === 0 ? "<0.1" : "<0.1")
+      })
+      
+      tl.to('#hr1', {duration: 0.5, x: 0, ease: "power2.out" },"<0.2")
+      .to('#hr2', {duration: 0.5, x: 0, ease: "power2.out" }, "<")
+      .to('.menu-button', {duration: 0.3, opacity: 1, ease: "power2.out" }, ">0.1")
+
+      tl.play();
+
+      // ScrollTrigger.create({
+      //   animation: tl,
+      //   trigger: "#title",
+      //   start: "top top",
+      //   end: "+=300%",
+      //   // pin: true,
+      //   // pinSpacing: true,
+      //   // pinReparent: true,
+      //   onEnter: ()=>tl.play(),
+      //   toggleActions: 'restart none restart none',
+      //   scrub: false,
+      //   invalidateOnRefresh: true,
+      // },);
+
+    },[isLoaded])
+
+    useGSAP(()=>{
 
       let tl2 = gsap.timeline();
-      slogan.forEach((_, i)=>{
-        tl2.to(
-          `#char_${i}`,
-          { duration: 0.3, y: 0, ease: "power2.out" },
-            i === 0 ? undefined : "<0.07")
-      })
+      // slogan.forEach((_, i)=>{
+      //   tl2.to(
+      //     `#char_${i}`,
+      //     { duration: 0.3, y: 0, ease: "power2.out" },
+      //       i === 0 ? undefined : "<0.07")
+      // })
       tl2.to("#photo", {duration: 0.5,  scale: 1, rotate:360, ease: "power2.out"}, "<0.2")
 
       let tl3 = gsap.timeline();
@@ -75,41 +113,46 @@ function App() {
       ScrollTrigger.create({
         animation: tl2,
         trigger: "#aboutMe",
-        start: "top center",
+        start: "top top",
+        end: "+=150%",
+        pin: true,
+        pinSpacing: true,
+        pinReparent: true,
+        scrub: 1,
         toggleActions: 'restart none restart none',
         onEnter: () => tl2.play(),
         invalidateOnRefresh: true,
       },);
 
-      ScrollTrigger.create({
-        animation: tl3,
-        trigger: "#experiences",
-        start: "topc center",
-        end: "center center",
-        scrub: 1,
-        toggleActions: 'restart none restart none',
-        onEnter: () => tl3.restart(),
-        invalidateOnRefresh: true,
-        // markers: true
-      },);
+      // ScrollTrigger.create({
+      //   animation: tl3,
+      //   trigger: "#experiences",
+      //   start: "topc center",
+      //   end: "center center",
+      //   scrub: 1,
+      //   toggleActions: 'restart none restart none',
+      //   onEnter: () => tl3.restart(),
+      //   invalidateOnRefresh: true,
+      //   // markers: true
+      // },);
 
-      ScrollTrigger.create({
-        animation: tl4,
-        trigger: "#projects",
-        start: "top +=60%",
-        toggleActions: 'restart none restart none',
-        onEnter: () => tl4.play(),
-        invalidateOnRefresh: true,
-      },);
+      // ScrollTrigger.create({
+      //   animation: tl4,
+      //   trigger: "#projects",
+      //   start: "top +=60%",
+      //   toggleActions: 'restart none restart none',
+      //   onEnter: () => tl4.play(),
+      //   invalidateOnRefresh: true,
+      // },);
 
-      ScrollTrigger.create({
-        animation: tl5,
-        trigger: "#skills",
-        start: "top center",
-        toggleActions: 'restart none restart none',
-        onEnter: () => tl5.play(),
-        invalidateOnRefresh: true,
-      },);
+      // ScrollTrigger.create({
+      //   animation: tl5,
+      //   trigger: "#skills",
+      //   start: "top center",
+      //   toggleActions: 'restart none restart none',
+      //   onEnter: () => tl5.play(),
+      //   invalidateOnRefresh: true,
+      // },);
 
     },[])
 
@@ -161,6 +204,7 @@ function App() {
       window.addEventListener("resize", handleResize);
 
       return ()=>{
+          setIsLoaded(false);
           clearTimeout(modalOpenTimerRef);
           clearTimeout(navOnTimerRef);
           window.removeEventListener('resize', handleResize);
@@ -174,29 +218,40 @@ function App() {
       <main>
 
         {/* 타이틀 */}
-        <section>
-          <video onCanPlayThrough={()=>setIsLoaded(true)} id={'intro-video'} autoPlay muted loop playsInline>
-            <source
-                src={introVideo}
-                type="video/mp4"/>
+        <section id={"title"}>
+
+          <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline>
+            <source src={introVideo} type="video/mp4"/>
           </video>
+
           <div>
             <div id={"title1"}>
-              <span>성실함과 학습능력을 {isMobile && <br/>} 갖춘</span>
+              {title1.map((v, i)=>(
+                <span key={i} id={`char1_${i}`}>{v}</span>
+              ))}
             </div>
+
+            <div>
+              <div id={"hr1"}/>
+              <div id={"hr2"}/>
+            </div>
+
             <div id={"title2"}>
-              <span>프론트엔드 개발자 {isMobile && <br/>}<span>김진화</span> <span>ver.2025</span></span>
+              {title2.map((v, i)=>(
+                <span key={i} id={`char2_${i}`}>{v}</span>
+              ))}
             </div>
           </div>
+
         </section>
 
         {/* 자기소개 */}
         <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
           <div>
             <span className='slogan'>
-              <span>{slogan.map((v, i)=>(
+              {/* <span>{slogan.map((v, i)=>(
                 <span key={i} id={`char_${i}`}>{v}</span>
-              ))}</span>
+              ))}</span> */}
             </span> 는 마음으로 개발자의 꿈을 꾸게 되었습니다.
           </div>
 

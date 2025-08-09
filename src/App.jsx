@@ -218,12 +218,15 @@ function App() {
     <>
       <main id={"page"}>
 
-        {/* 타이틀 */}
-        <section id={"title"}>
-
           <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline>
             <source src={introVideo} type="video/mp4"/>
           </video>
+        {/* 타이틀 */}
+        <div className='title-wrap'>
+
+        
+        <section id={"title"}>
+
 
           <div>
             <div id={"title1"}>
@@ -245,6 +248,7 @@ function App() {
           </div>
 
         </section>
+        </div>
 
         {/* 자기소개 */}
         <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>

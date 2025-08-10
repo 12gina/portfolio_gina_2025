@@ -57,199 +57,174 @@ body {
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
- main {
-  width: 100vw;
-  color: white;
-  overflow-x: hidden;
+// main {
+//   width: 100vw;
+//   height: 100vh;
+//   color: white;
+//   overflow-x: hidden;
+//   > video {
+//     height: 100%;
+//     width: 100%;
+//     position: absolute;
+//     inset: 0; // top, right, bottom, left 전부 0
+//     object-fit: cover;
+//   }
+// }
 
-  // 타이틀
-  > #title {
-    height: 100vh;
-    width: 100%;
-    display: flex;
-    place-items: center;
-    position: relative; 
-    overflow: clip;   
-    > div {
-      width: 100%;
-      line-height: 1.5;
-      color: white;
-      text-align: center;
-      white-space: pre-line;
-      font-size: clamp(0.3vw, 3vw, 30rem);
-      text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
-      > div {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        padding: 1rem 0;
+// 타이틀
+// #title {
+//   height: 100vh;
+//   width: 100%;
+//   display: flex;
+//   place-items: center;
+//   // position: relative;
+//   z-index: 1;
+//   > div {
+//     width: 100%;
+//     line-height: 1.5;
+//     color: white;
+//     text-align: center;
+//     white-space: pre-line;
+//     font-size: clamp(0.3vw, 3vw, 30rem);
+//     text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
+//     > div {
+//       width: 100%;
+//       display: flex;
+//       justify-content: center;
+//       padding: 1rem 0;
+//       > span {
+//         display: block;
+//       }
+
+//       &:nth-of-type(1) {
+//         > span {
+//           // transform: translateY(-70%);
+//         }
+//       }
+
+//       &:nth-of-type(2) {
+//         width: 100%;
+//         height: calc(6rem + 2px);
+//         justify-content: space-between;
+//         > div {
+//           flex: 1;
+//           height: 2px;
+//           background-color: white;
+//           margin: 3rem 0;
+//           &:nth-of-type(1){
+//             transform: translateX(-100%);
+//           }
+//           &:nth-of-type(2){
+//             transform: translateX(100%);
+//           }
+//         }
+//       }
+
+//       &:nth-of-type(3) {
+//         > span {
+//           // transform: translateY(70%);
+//         }
+//       }
+//     }
+//     > div:nth-of-type(1), div:nth-of-type(3) {
+//       column-gap: 3rem;
+//       > span {
+//         // opacity: 0;
+//         // scale: 5;
+//         scale: 1;
+//       }
+//     }
+
+//     @include respond(sm) {
+//       font-size: 3.5rem;
+//       // padding: 0 2rem;
+//       > div:nth-of-type(2) {
+//         > span {
+//           > span:nth-of-type(1) {
+//             font-size: 5rem;
+//           }
+//           > span:nth-of-type(2) {
+//             font-size: 2rem
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// 자기소개
+#aboutMe {
+  background-color: var(--color-blue-90);
+  white-space: pre-line;
+  > div {
+    > div:nth-of-type(2) {
+      line-height: 1.8;
+      display: flex;
+      flex-direction: column;
+      row-gap: 1.2em;
+      > div >.slogan {
+        margin-bottom: -2.2em;
+        overflow: hidden;
+        display: inline-block;
         > span {
-          display: block;
-        }
-
-        &:nth-of-type(1) {
+          font-size: 3em;
           > span {
-            transform: translateY(-70%);
-          }
-        }
-
-        &:nth-of-type(2) {
-          width: 100%;
-          height: calc(6rem + 2px);
-          justify-content: space-between;
-          > div {
-            flex: 1;
-            height: 2px;
-            background-color: white;
-            margin: 3rem 0;
-            &:nth-of-type(1){
-              transform: translateX(-100%);
-            }
-            &:nth-of-type(2){
-              transform: translateX(100%);
-            }
-          }
-        }
-
-        &:nth-of-type(3) {
-          > span {
-            transform: translateY(70%);
-          }
-        }
-      }
-      > div:nth-of-type(1), div:nth-of-type(3) {
-        column-gap: 3rem;
-        > span {
-          opacity: 0;
-          scale: 5;
-        }
-      }
-
-      @include respond(sm) {
-        font-size: 3.5rem;
-        // padding: 0 2rem;
-        > div:nth-of-type(2) {
-          > span {
-            > span:nth-of-type(1) {
-              font-size: 5rem;
-            }
-            > span:nth-of-type(2) {
-              font-size: 2rem
-            }
-          }
-        }
-      }
-    }
-  }
-
-  // 자기소개
-  > #aboutMe {
-      background-color: black;
-      white-space: pre-line;
-      > div {
-        > div:nth-of-type(2) {
-          line-height: 1.8;
-          display: flex;
-          flex-direction: column;
-          row-gap: 1.2em;
-          > div >.slogan {
-            margin-bottom: -2.2em;
-            overflow: hidden;
             display: inline-block;
-            > span {
-              font-size: 3em;
-              > span {
-                display: inline-block;
-                transform: translateY(-100%);
-              }
-            }
-          }
-          
-          // 자격증
-          > div:nth-of-type(2) {
-            > div{
-              > span {
-                color: var(--color-gray-50);
-              }
-            }
-          }
-
-          // 사진 & 연락처
-          > div:nth-of-type(3) {
-            display: grid;
-            grid-template-columns: 7em 1fr;
-            column-gap: 2rem;
-            align-items: center;
-            > img {
-              scale: 0;
-              width: 100%;
-            }
-            > div {
-              width: calc(100% - 2rem);
-              padding: 2rem;
-              box-sizing: border-box;
-              border: 1px solid white;
-              border-radius: 20px;
-              > span {
-                color: var(--color-gray-50);
-              }
-            }
+            transform: translateY(-100%);
           }
         }
       }
-  }
-  
-  // 경력
-  > #experiences {
-    color: var(--color-black);
-  }
-
-  // 프로젝트
-  > #projects {
-    color: var(--color-black);
-    background-color: var(--color-yellow-dark);
-    > div {
+      
+      // 자격증
       > div:nth-of-type(2) {
-        > div:nth-of-type(1){
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
-          width: 100%;
-          column-gap: 1.5em;
-          transform: translateX(100%);
-        }
-        > div:nth-of-type(2) {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          width: 100%;
-          column-gap: 1.5em;
-          row-gap: 1.5em;
-          padding-top: 1.5em;
-          transform: translateX(100%);
-        }
-        @include respond(sm) {
-          > div:nth-of-type(1) {
-          }
-          > div:nth-of-type(2) {
-            grid-template-columns: 1fr 1fr;
+        > div{
+          > span {
+            color: var(--color-gray-50);
           }
         }
       }
-    }
-  }
 
-  // skill
-  > #skills {
-    color: var(--color-black);
-    > div {
-      > div:nth-of-type(2) {
-        display: flex;
-        flex-direction: column;
-        gap: 2em;
+      // 사진 & 연락처
+      > div:nth-of-type(3) {
+        display: grid;
+        grid-template-columns: 7em 1fr;
+        column-gap: 2rem;
+        align-items: center;
+        > img {
+          scale: 0;
+          width: 100%;
+        }
+        > div {
+          width: calc(100% - 2rem);
+          padding: 2rem;
+          box-sizing: border-box;
+          border: 1px solid white;
+          border-radius: 20px;
+          > span {
+            color: var(--color-gray-50);
+          }
+        }
       }
     }
   }
 }
 
+// 경력
+#experiences {
+  color: var(--color-black);
+}
+
+// skill
+#skills {
+  color: var(--color-black);
+  > div {
+    > div:nth-of-type(2) {
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+    }
+  }
+}
   
 .section-layout {
   width: 100%;
@@ -303,14 +278,6 @@ body {
       }
     }
   }
-}
-
-video {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  inset: 0; // top, right, bottom, left 전부 0
-  object-fit: cover;
 }
 
 // 메뉴 모달

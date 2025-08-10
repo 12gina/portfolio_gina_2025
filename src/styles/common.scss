@@ -19,7 +19,8 @@ a {
 }
 
 a:hover {
-  color: white;
+  color: var(--color-black);
+  transition: color 0.3s ease;
 }
 
 button {
@@ -30,6 +31,10 @@ button {
 }
 
 body {
+  -webkit-user-select: none;  /* Chrome/Safari/Edge(iOS) */
+  -ms-user-select: none;      /* 구형 Edge/IE */
+  user-select: none;          /* 표준 */
+  -webkit-touch-callout: none;/* iOS 길게눌러 복사 메뉴 방지 */
   font-size: 1.6rem;  /* = 16px */
   margin: 0 auto;
   width: 100vw;
@@ -186,33 +191,21 @@ main {
   > section:nth-of-type(4) {
     color: var(--color-black);
     background-color: var(--color-yellow-dark);
-    > div {
-      > div:nth-of-type(2) {
-        > div:nth-of-type(1){
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr;
-          width: 100%;
-          column-gap: 1.5em;
-          transform: translateX(100%);
-        }
-        > div:nth-of-type(2) {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          width: 100%;
-          column-gap: 1.5em;
-          row-gap: 1.5em;
-          padding-top: 1.5em;
-          transform: translateX(100%);
-        }
-        @include respond(sm) {
-          > div:nth-of-type(1) {
-          }
-          > div:nth-of-type(2) {
-            grid-template-columns: 1fr 1fr;
-          }
+
+    > div{
+      height: 100%;
+      > div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5em;
+      }
+      @include respond(sm) {
+        > div {
+          grid-template-columns: 1fr 1fr;
         }
       }
     }
+    
   }
 
   // skill
@@ -336,32 +329,33 @@ nav {
       align-items: flex-end;
 
       > span:nth-of-type(3) {
-        font-size: clamp( 0.1vw, 2.6vw, 2.6em);
+        scale: 0.9;
         letter-spacing: -1px;
+        transform: translateX(0.7em);
       }
       > span, div {
         opacity: 0.7;
         transition: opacity 0.3s ease;
-        &:hover {
-          opacity: 1;
-          color: var(--color-black);
-        }
+      }
+      > span:hover {
+        opacity: 1;
       }
       > span:nth-of-type(1) {
         opacity: 1;
         cursor:default;
-        &:hover {
-          opacity: 1;
-        }
       }
       > div {
         display: flex;
-        column-gap: 1.5vw;
+        column-gap: 0.5em;
         align-items: center;
-        > a > img {
-          width: 3.4vw;
+        > a > img  {
+          width: 1em;
           opacity: 0.8;
-          margin-top: 0.5vw;
+          margin-top: 0.2em;
+          transition: opacity 0.3s ease;
+          &:hover {
+            opacity: 1;
+          }
         }
       }
     }
@@ -565,26 +559,24 @@ nav {
 .project-card {
   width: 100%;
   height: 100%;
-  row-gap: 1.5em;
+  aspect-ratio: 1 / 1;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  .image {
-    display: grid;
-    grid-template-rows: auto 1fr;
+  border-radius: 8px;
+  opacity: 0;
+  > a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
-    aspect-ratio: 2.1 / 1;
+    height: 100%;
     overflow: hidden;
-    border-radius: 8px;
+      border-radius: 8px;
     > img {
-      grid-column: 1 / -1;
-      grid-row: 1 / -1;
       object-fit: cover;
       width: 100%;
       height: 100%;
-      flex: 1;
     }
     &.mobile {
       aspect-ratio: 1 / 1.9;
@@ -593,25 +585,24 @@ nav {
       aspect-ratio: 1 / 1.55;
     }
     > div:last-of-type {
-      flex: 1;
       color: white;
       font-size: 1em;
-      grid-column: 1 / -1;
-      grid-row: 1 / -1;
+      bottom: 0;
+      left: 0;
+      height: 100%;
+      position: absolute;
       width: 100%;
       display: flex;
       flex-direction: column;
-      row-gap: 0.4rem;
-      padding: 9% 1rem;
+      justify-content: flex-end;
+      row-gap: 1rem;
+      padding: 2rem;
       box-sizing: border-box;
       background-color: rgba(0, 0, 0, 0.6);
-      transform: translateY(17em);
-      transition: transform 0.3s ease;
+      transition: opacity 0.3s ease;
       > div:nth-of-type(2), div:nth-of-type(3) {
         font-size: 0.7em;
-        &.wrap {
-          white-space: pre-line;
-        }
+        white-space: pre-line;
       }
       > div:last-of-type {
         display: flex;
@@ -621,23 +612,27 @@ nav {
         row-gap: 0.5rem;
         align-items: baseline;
         > img {
-          width: 2rem;
+          width: 2.5rem;
           border-radius: 2px;
-        }
-        @include respond(sm) {
-          display: none;
         }
       }
     }
-    &:hover{
-      > div:last-of-type {
-        transform: translateY(0);
+    @include respond(overMd) {
+      &:hover{
+        > div:last-of-type {
+          opacity: 0;
+        }
       }
     }
     @include respond(sm) {
       > div:last-of-type {
+        bottom: 0;
+        height: 80%;
         transform: translateY(0);
-        padding: 0;
+        padding: 1rem;
+        > div:last-of-type {
+          display: none;
+        }
       }
     }
   }

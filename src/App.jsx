@@ -51,11 +51,16 @@ function App() {
       expData.forEach((_, i)=>{
         tl3.to(
           `#exp-card_${i}`,
-          { duration: 0.3, opacity: 1, y: 0, ease: "power2.out" })})
+          { duration: 0.3, opacity: 1, y: 0, ease: "power2.out" })
+        })
 
       let tl4 = gsap.timeline();
-        tl4.to('#project1', {duration: 0.5,  x: 0, ease: "power2.out"})
-        .to('#project2', {duration: 0.5,  x: 0, ease: "power2.out" }, "<0.2") 
+      projectData.forEach((_, i)=>{
+        tl4.to(
+          `#project-card_${i}`,
+          { duration: 0.3, opacity: 1, ease: "sine.in" },
+            i === 0 ? undefined : "<0.25")
+        })
       
       let tl5 = gsap.timeline();
       skillData.forEach((item, idx)=>{
@@ -88,7 +93,7 @@ function App() {
         end: "center center",
         scrub: 1,
         toggleActions: 'restart none restart none',
-        onEnter: () => tl3.restart(),
+        onEnter: () => tl3.play(),
         invalidateOnRefresh: true,
         // markers: true
       },);
@@ -221,10 +226,6 @@ function App() {
             </div>
           </div>
 
-          {/* <div>
-            이력서 다운로드
-            <DownloadOutlined style={{fontSize:22}}/>
-          </div> */}
         </SectionLayout>
         
         {/* 경력 */}
@@ -236,16 +237,9 @@ function App() {
 
         {/* 프로젝트 */}
         <SectionLayout title={"Projects"} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          <div id={`project1`}>
-            {projectData.slice(0,3).map((v,i)=>(
+            {projectData.map((v ,i)=>(
               <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
             ))}
-          </div>
-          <div id={`project2`}>
-            {projectData.slice(3, projectData.length).map((v,i)=>(
-              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i+3}/>
-            ))}
-          </div>
         </SectionLayout>
 
         {/* 스킬 */}

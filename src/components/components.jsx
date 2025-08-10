@@ -50,11 +50,10 @@ export const ExpCard = ({company, idx, department, duration, description}) => (
     </article>
 )
 
-export const ProjectCard = ({title, image, skills, description, idx=0, href, task, device=""}) => (
+export const ProjectCard = ({title, image, skills, description, idx, href, task, device=""}) => (
     <article className={`project-card`} id={`project-card_${idx}`}>
-        {idx===0 && <div className="empty-block"/>}
-        <a className={`${image? "image":"empty-block"} ${device}`} href={href} target="_blank" rel="noopener noreferrer">
-            {image && <img src={image} alt="image"/>}
+        <a className={`${"image"} ${device}`} href={href} target="_blank" rel="noopener noreferrer">
+            <img src={image} alt="image"/>
             <div>
                 <div>{title}</div>
                 {/* <div>{description}</div> */}
@@ -64,7 +63,6 @@ export const ProjectCard = ({title, image, skills, description, idx=0, href, tas
                 </div>
             </div>
         </a>
-        {idx===2 &&<div className="empty-block"/>}
     </article>
 )
 

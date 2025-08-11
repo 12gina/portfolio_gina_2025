@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
-import photo from "./assets/images/photo.jpg"
+import photo from "./assets/images/photo.png"
 import './styles/index.scss'
 import { certiData, expData, projectData, skillData, slogan, subtitles, title1, title2 } from './constants/constants'
 import { MenuModal } from './components/menuModal'
@@ -10,6 +10,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { Loading } from './components/loading'
+import { GridCell } from './components/gridCell'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,7 @@ function App() {
   const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
   const [currentSection, setCurrentSection] = useState("aboutMe");
   const [isLoaded, setIsLoaded] = useState(false);
+  const [isCellHover, setIsCellHover] = useState(Object.fromEntries(Array.from({ length: 576 }, (_, i) => [i + 1, false])));
   const [isMobile, setIsMobile] = useState(false);
 
   const modalOpenTimerRef = useRef(null);
@@ -140,6 +142,17 @@ function App() {
 
     // },[])
 
+    const hanCellOn = (idx) => {
+      setIsCellHover( v => ({...v, [idx]: true}))
+    }
+
+    const hanCellOff = (idx) => {
+      setTimeout(() => {
+        setIsCellHover(v => ({ ...v, [idx]: false }));
+      }, 3 * 1000);
+    };
+
+
     useEffect(()=>{
         if (isMenuButtonOn) {
             modalOpenTimerRef.current = setTimeout(()=>setIsMenuModalOpen(true), 300)
@@ -206,6 +219,7 @@ function App() {
       </video>
       
       <main id={'main'} style={{width: "100vw", height: 'auto', overflowX:'hidden', color: "white", position: "relative", }}> 
+      
       {/* 타이틀 */}
         <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', paddingBottom:'25%', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center",}}>
           
@@ -219,28 +233,32 @@ function App() {
         </section>
 
         {/* 자기소개 */}
-        <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
-          <div>
+        <section style={{width: '100%', height: '100vh', position:'relative'}} title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+
+          <img id={"photo"} src={photo} style={{height: '100%', objectFit:'cover', position: 'absolute', zIndex: -1}} alt='photo'/>
+          
+          <div style={{width: '100%', height: '100%', position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(32, 1fr)', gridAutoFlow:'row'}}>
+            {Array.from({length:576}, (_, i)=>(
+              <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
+            ))}
+          </div>
+
+          {/* {`일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다.
+            또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
             <span className='slogan'>
               <span>{slogan.map((v, i)=>(
                 <span key={i} id={`char_${i}`}>{v}</span>
               ))}</span>
             </span> 는 마음으로 개발자의 꿈을 꾸게 되었습니다.
-          </div>
-
-          {`일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다.
-            또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
-
           <div>
             {certiData.map((v)=>(
               <div key={v.title}>
                 {v.title} <span key={v.title}>{v.date} / {v.authority}</span><br/>
               </div>
             ))}
-          </div>
+          </div> */}
 
           <div>
-            <img id={"photo"} src={photo} alt='photo'/>
             <div id={"summary"}>
               📞 010-8835-7380<br/>
               ✉️ 12cometome@naver.com<br/>
@@ -248,7 +266,7 @@ function App() {
               🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
             </div>
           </div>
-        </SectionLayout>
+        </section>
         
         {/* 경력 */}
         {/* <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
@@ -281,7 +299,7 @@ function App() {
       </main>
 
       <Loading isLoaded={isLoaded}/>
-      <div id={'subtitle'} style={{display: 'flex', height:'1.9em', overflow: 'hidden', flexDirection:'column', color:'white', position: 'fixed', top: '2rem', left: '2rem', fontSize: '1.5em'}}>
+      <div id={'subtitles'} style={{display: 'flex', height:'1.9em', overflow: 'hidden', flexDirection:'column', color:'white', position: 'fixed', top: '2rem', left: '2rem', fontSize: '1.5em'}}>
         {subtitles.map((v, i)=>(
           <span key={i} style={{padding:'0.2em 0'}}>{v}</span>
         ))}

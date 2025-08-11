@@ -153,61 +153,71 @@ body {
 // }
 
 // 자기소개
-#aboutMe {
-  background-color: var(--color-blue-90);
-  white-space: pre-line;
-  > div {
-    > div:nth-of-type(2) {
-      line-height: 1.8;
-      display: flex;
-      flex-direction: column;
-      row-gap: 1.2em;
-      > div >.slogan {
-        margin-bottom: -2.2em;
-        overflow: hidden;
-        display: inline-block;
-        > span {
-          font-size: 3em;
-          > span {
-            display: inline-block;
-            transform: translateY(-100%);
-          }
-        }
-      }
+// #aboutMe {
+//   background-color: var(--color-blue-90);
+//   white-space: pre-line;
+//   > div {
+//     > div:nth-of-type(2) {
+//       line-height: 1.8;
+//       display: flex;
+//       flex-direction: column;
+//       row-gap: 1.2em;
+//       > div >.slogan {
+//         margin-bottom: -2.2em;
+//         overflow: hidden;
+//         display: inline-block;
+//         > span {
+//           font-size: 3em;
+//           > span {
+//             display: inline-block;
+//             transform: translateY(-100%);
+//           }
+//         }
+//       }
       
-      // 자격증
-      > div:nth-of-type(2) {
-        > div{
-          > span {
-            color: var(--color-gray-50);
-          }
-        }
-      }
+//       // 자격증
+//       > div:nth-of-type(2) {
+//         > div{
+//           > span {
+//             color: var(--color-gray-50);
+//           }
+//         }
+//       }
 
-      // 사진 & 연락처
-      > div:nth-of-type(3) {
-        display: grid;
-        grid-template-columns: 7em 1fr;
-        column-gap: 2rem;
-        align-items: center;
-        > img {
-          scale: 0;
-          width: 100%;
-        }
-        > div {
-          width: calc(100% - 2rem);
-          padding: 2rem;
-          box-sizing: border-box;
-          border: 1px solid white;
-          border-radius: 20px;
-          > span {
-            color: var(--color-gray-50);
-          }
-        }
-      }
-    }
-  }
+//       // 사진 & 연락처
+//       > div:nth-of-type(3) {
+//         display: grid;
+//         grid-template-columns: 7em 1fr;
+//         column-gap: 2rem;
+//         align-items: center;
+//         > img {
+//           scale: 0;
+//           width: 100%;
+//         }
+//         > div {
+//           width: calc(100% - 2rem);
+//           padding: 2rem;
+//           box-sizing: border-box;
+//           border: 1px solid white;
+//           border-radius: 20px;
+//           > span {
+//             color: var(--color-gray-50);
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+.cell {
+  background-color:var(--color-blue-90);
+  font-size: 1.7em;
 }
+
+#c332, #c333, #c365, #c366, #c300  {
+  background-color: transparent;
+}
+
 
 // 경력
 #experiences {
@@ -761,6 +771,29 @@ nav {
     opacity: 0;
   }
 }
+
+
+@keyframes flipY {
+  0%   { transform: rotateY(0deg);   opacity: 1; }
+  50%  { transform: rotateY(90deg);  opacity: 0; }
+  100% { transform: rotateY(180deg); opacity: 1; }
+}
+
+// @keyframes flip {
+//   0% {
+//     transform: rotateY(0deg); // 요소와 똑같이 이동 후 스핀
+//   }
+//   50% {
+//     transform: rotateY(90deg);
+//   }
+//   51% {
+//     transform: rotateY(90deg);
+//   }
+//   100% {
+//     transform: rotateY(0deg);
+//   }
+// }
+
 
 .loading {
   width: 100vw;

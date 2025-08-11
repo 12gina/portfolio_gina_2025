@@ -58,18 +58,20 @@ function App() {
 
     const st = ScrollTrigger.create({
       animation: tl,
-      trigger: "#title-wrap",
+      trigger: "#title",
       start: "top top",
+      // end: "+=0.1%",
       end: "top top",
       pin: true,
       scrub: false,
+      // scrub: true,
       once: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
     },);
 
     tl.eventCallback("onComplete", () => {
-      // st.kill();
+      st.kill();
       setIsPlayed(true);    
     });
 
@@ -99,10 +101,11 @@ function App() {
 
     ScrollTrigger.create({
       animation: tl2,
-      trigger: "#title",
+      trigger: "#main",
       start: "top top",
       end: "+=80%",
       pin: true,
+      pinSpacing: true,
       scrub: 1,
       toggleActions: "none play reverse play",
       anticipatePin: 1,
@@ -245,16 +248,15 @@ function App() {
 
   return (
     <>
-      <main id={"page"} style={{width: "100vw", height: '100%', color: "white", display: "flex", flexDirection: "column", overflowX: "hidden", position: "relative" }}>
 
-        <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline
-          style={{width: "100%", height: '100vh', position:"fixed", inset:0, color: "white", overflowX: "hidden", objectFit:'cover', }}>
-          <source src={introVideo} type="video/mp4"/>
-        </video>
-        
-        {/* 타이틀 */}
-        <div id={'title-wrap'}>
-        <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center", zIndex:1, fontSize: 'clamp(0.7vw, 7vw, 70rem)', padding: '10rem 5rem', boxSizing: 'border-box'}}>
+      <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline
+        style={{width: "100%", height: '100vh', position:"fixed", inset:0, color: "white", overflowX: "hidden", objectFit:'cover', zIndex: -1 }}>
+        <source src={introVideo} type="video/mp4"/>
+      </video>
+      
+      <main id={'main'} style={{width: "100vw", height: 'auto', overflowX:'hidden', color: "white", position: "relative", }}> 
+      {/* 타이틀 */}
+        <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center", fontSize: 'clamp(0.7vw, 7vw, 70rem)', padding: '10rem 5rem', boxSizing: 'border-box'}}>
 
             <div id={"title2"} style={{width: "100%", display: 'flex', textAlign: "center", columnGap: "2rem", justifyContent: "center", textShadow:"5px 5px 3px rgba(0, 0, 0, 0.5)" }}>
               {title2.map((v, i)=>(
@@ -274,10 +276,9 @@ function App() {
             </div>
 
         </section>
-        </div>
 
         {/* 자기소개 */}
-        <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+        {/* <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
           <div>
             <span className='slogan'>
               <span>{slogan.map((v, i)=>(
@@ -306,7 +307,7 @@ function App() {
               🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
             </div>
           </div>
-        </SectionLayout>
+        </SectionLayout> */}
         
         {/* 경력 */}
         {/* <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>

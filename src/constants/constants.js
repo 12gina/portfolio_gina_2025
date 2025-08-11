@@ -38,9 +38,11 @@ export const menuList = [
 // export const title = ['성', '실', '함', '과', ' ', '학', '습', '능', '력', '을', ' ', '갖', '춘', '\n',
 //     '프', '론', '트', '엔', '드', '  ', '개', '발', '자', " ", '김', '진', '화', ' ', 'v', 'e', 'r', '.', '2', '0', '2', '5']
 
-export const title1 = ['F', 'R', 'O', 'N', 'T', '-', 'E', 'N', 'D', '\u00A0', 'E', 'N', 'G', 'I', 'N', 'E', 'E', 'R']
+// export const title1 = ['F', 'R', 'O', 'N', 'T', '-', 'E', 'N', 'D', '\u00A0', 'E', 'N', 'G', 'I', 'N', 'E', 'E', 'R']
+export const title1 = ['F', 'R', 'O', 'N', 'T']
 export const title2 = ['K', 'I', 'M', '\u00A0', 'J', 'I', 'N', 'H', 'W', 'A']
 
+export const subtitles = ['Front-end Engineer KIM JINHWA\'s Stories', 'About Me', 'Experiences', 'Projects', 'Skills']
 export const slogan = ['하', '고', '싶', '은', '\u00A0', '것', '을', '\u00A0', '하', '자']
 
 export const certiData= [

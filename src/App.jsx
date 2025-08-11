@@ -2,11 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
-import { certiData, expData, projectData, skillData, slogan, title1, title2 } from './constants/constants'
+import { certiData, expData, projectData, skillData, slogan, subtitles, title1, title2 } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/menuButton'
 import { SectionLayout } from './components/sectionLayout'
-import { ExpCard, ProjectCard, SkillCard } from './components/components'
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
@@ -20,11 +19,11 @@ function App() {
   const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
   const [currentSection, setCurrentSection] = useState("aboutMe");
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isPlayed, setIsPlayed] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const modalOpenTimerRef = useRef(null);
   const navOnTimerRef = useRef(null);
+  const tlRef = useRef(null);
   const sectionRefs = useRef({
     title: null,
     aboutMe: null,
@@ -36,86 +35,38 @@ function App() {
   useGSAP(()=>{
 
     if (!isLoaded) return;
-    
-    let tl = gsap.timeline({paused: true});
+    if (tlRef.current) return;
 
-    title2.forEach((_, i)=>{
-      tl.to(
-        `#char2_${i}`,
-        { duration: 0.5, y: 0, scale: 1, opacity: 1, ease: "power2.out" },
-          i === 0 ? undefined : "<0.1")
-    })
+    tlRef.current = gsap.timeline({paused: true});
+
     title1.forEach((_, i)=>{
-      tl.to(
+      tlRef.current.to(
         `#char1_${i}`,
-        { duration: 0.5, y: 0, scale: 1, opacity: 0.6, ease: "power2.out" },
-          i === 0 ? "<0.1" : "<0.1")
+        { duration: 2, y: "40%", scale: 1, opacity: 0.5, ease: "power2.out",
+          rotate: i===0?"-10deg":i===1?"20deg":i===2?"-5deg":i===3?"10deg":"5deg"},
+          i === 0 ? "<0.1" : "<0.3")
     })
-    
-    tl.to('#hr1', {duration: 0.5, x: 0, ease: "power2.out" },"<0.2")
-    .to('#hr2', {duration: 0.5, x: 0, ease: "power2.out" }, "<")
-    .to('.menu-button', {duration: 0.3, opacity: 1, ease: "power2.out" }, ">0.1")
 
-    const st = ScrollTrigger.create({
-      animation: tl,
+    ScrollTrigger.create({
+      animation: tlRef.current,
       trigger: "#title",
       start: "top top",
-      // end: "+=0.1%",
-      end: "top top",
+      end: "+=50%",
       pin: true,
+      onEnter: () => tlRef.current.play(0),
+      toggleActions: "complete reverse play reverse",
       scrub: false,
-      // scrub: true,
-      once: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
     },);
+        
+    let tl2 = gsap.timeline({delay:3})
+    tl2.to(`#subtitles`, {duration: 0.3, opacity:1, ease: "power2.out"})
+      .to(`.menu-button`, {duration: 0.3, opacity:1, ease: "power2.out"}, "<0.1")
 
-    tl.eventCallback("onComplete", () => {
-      st.kill();
-      setIsPlayed(true);    
-    });
 
   },[{dependencies: [isLoaded]}])
 
-  useGSAP(()=>{
-
-    if (!isPlayed) return;
-  
-    let tl2 = gsap.timeline({paused: true});
-
-    title1.forEach((_, i)=>{
-      tl2.to(
-        `#char1_${title1.length -1- i}`,
-        { duration: 0.5, y: "70%", scale: 5, opacity: 0, ease: "power2.out" },
-          i === 0 ? undefined : "<0.1")
-    })
-    title2.forEach((_, i)=>{
-      tl2.to(
-        `#char2_${title2.length -1 - i}`,
-        { duration: 0.5, y: "-70%", scale: 5, opacity: 0, ease: "power2.out" },
-          i === 0 ? "<0.1" : "<0.1")
-    })
-    
-    tl2.to('#hr1', {duration: 0.5, x: '-120%', ease: "power2.out" },"<0.2")
-    .to('#hr2', {duration: 0.5, x: '120%', ease: "power2.out" }, "<")
-
-    ScrollTrigger.create({
-      animation: tl2,
-      trigger: "#main",
-      start: "top top",
-      end: "+=80%",
-      pin: true,
-      pinSpacing: true,
-      scrub: 1,
-      toggleActions: "none play reverse play",
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      markers: false,
-    },);
-
-
-  },[{dependencies: [isPlayed]}])
-  // },[])
 
     // useGSAP(()=>{
 
@@ -256,29 +207,19 @@ function App() {
       
       <main id={'main'} style={{width: "100vw", height: 'auto', overflowX:'hidden', color: "white", position: "relative", }}> 
       {/* 타이틀 */}
-        <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center", fontSize: 'clamp(0.7vw, 7vw, 70rem)', padding: '10rem 5rem', boxSizing: 'border-box'}}>
-
-            <div id={"title2"} style={{width: "100%", display: 'flex', textAlign: "center", columnGap: "2rem", justifyContent: "center", textShadow:"5px 5px 3px rgba(0, 0, 0, 0.5)" }}>
-              {title2.map((v, i)=>(
-                <span key={i} id={`char2_${i}`} style={{opacity: 0, scale:5}}>{v}</span>
-              ))}
-            </div>
-
-            <div style={{width: "100%", height: 'calc(6rem + 2px)', display: 'flex', justifyContent: "space-between" }}>
-              <div id={"hr1"} style={{flex: 1, height: 2, backgroundColor: "white", margin: '3rem 0', transform: "translateX(-120%)"}}/>
-              <div id={"hr2"} style={{flex: 1, height: 2, backgroundColor: "white", margin: '3rem 0', transform: "translateX(120%)"}}/>
-            </div>
-
-            <div id={"title1"} style={{width: "100%", display: 'flex', fontWeight: 900, textAlign: "center", columnGap: "1rem", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)" }}>
-              {title1.map((v, i)=>(
-                <span key={i} id={`char1_${i}`} style={{opacity: 0, scale:5}}>{v}</span>
-              ))}
-            </div>
+        <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', paddingBottom:'25%', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center",}}>
+          
+          <div id={"title1"} style={{width: "150%", display: 'flex', fontWeight: 900, textAlign: "center", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)", fontSize: 'clamp(3.8vw, 38vw, 38vw)', letterSpacing: "-5vw", margin: "auto 0"}}>
+            {title1.map((v, i)=>(
+              <span key={i} id={`char1_${i}`} style={{opacity: 0, scale:0.8, transform: "translateY(-200%)",
+                }}>{v}</span>
+            ))}
+          </div>
 
         </section>
 
         {/* 자기소개 */}
-        {/* <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+        <SectionLayout title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
           <div>
             <span className='slogan'>
               <span>{slogan.map((v, i)=>(
@@ -307,7 +248,7 @@ function App() {
               🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
             </div>
           </div>
-        </SectionLayout> */}
+        </SectionLayout>
         
         {/* 경력 */}
         {/* <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
@@ -340,6 +281,11 @@ function App() {
       </main>
 
       <Loading isLoaded={isLoaded}/>
+      <div id={'subtitle'} style={{display: 'flex', height:'1.9em', overflow: 'hidden', flexDirection:'column', color:'white', position: 'fixed', top: '2rem', left: '2rem', fontSize: '1.5em'}}>
+        {subtitles.map((v, i)=>(
+          <span key={i} style={{padding:'0.2em 0'}}>{v}</span>
+        ))}
+      </div>
       <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
       <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection} setCurrentSection={setCurrentSection}/>
 

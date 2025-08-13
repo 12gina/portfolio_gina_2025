@@ -209,12 +209,77 @@ body {
 //   }
 // }
 
-.cell {
-  background-color:var(--color-blue-90);
-  font-size: 1.7em;
+#subtitle {
+  height: 1.9em;
+  overflow: hidden;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+  font-size: 1.5em;
+  color: white;
+  opacity: 0;
+  > div {
+    flex-direction: column;
+    display: flex;
+    height: fit-content;
+    transition: transform 0.5s ease;
+    > span {
+      padding: 0.2em 0;
+    }
+    &.aboutMe {
+      transform: translateY(-1.9em);
+    }
+    &.experiences {
+      transform: translateY(calc(1.9em * 2));
+    }
+    &.projects {
+      transform: translateY(calc(1.9em * 3));
+    }
+    &.skills {
+      transform: translateY(calc(1.9em * 4));
+    }
+  } 
 }
 
-#c332, #c333, #c365, #c366, #c300  {
+#aboutMe {
+  #name {
+    font-size: 2em;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  #summary {
+    line-height: 2;
+    text-align: right;
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  #certification {
+    text-align: right;
+    border: 1px solid white;
+    border-radius: 1em;
+    padding: 2rem;
+    line-height: 2;
+    opacity: 0;
+    transform: translateY(50%);
+    > div {
+      > span {
+        color: var(--color-gray-50);
+      }
+    }
+  }
+}
+
+.cell {
+  background-color:var(--color-blue-90);
+  overflow: hidden;
+  > img {
+    height: 95%;
+    object-fit: cover;
+  }
+}
+
+#c35, #c26  {
   background-color: transparent;
 }
 

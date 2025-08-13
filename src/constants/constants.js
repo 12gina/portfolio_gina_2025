@@ -42,7 +42,7 @@ export const menuList = [
 export const title1 = ['F', 'R', 'O', 'N', 'T']
 export const title2 = ['K', 'I', 'M', '\u00A0', 'J', 'I', 'N', 'H', 'W', 'A']
 
-export const subtitles = ['Front-end Engineer KIM JINHWA\'s Stories', 'About Me', 'Experiences', 'Projects', 'Skills']
+export const subtitles = [{id:"title", text:'Front-end Engineer KIM JINHWA\'s Stories'}, {id:"aboutMe", text:'About Me'}, {id:"experiences", text:'Experiences'}, {id:"projects", text: 'Projects'}, {id:"skills", text: 'Skills'}]
 export const slogan = ['하', '고', '싶', '은', '\u00A0', '것', '을', '\u00A0', '하', '자']
 
 export const certiData= [

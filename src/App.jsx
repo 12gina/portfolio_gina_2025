@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
-import photo from "./assets/images/photo.png"
+import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
-import { certiData, expData, projectData, skillData, slogan, subtitles, title1, title2 } from './constants/constants'
+import { certiData, expData, projectData, skillData, slogan, title1, title2 } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/menuButton'
 import { SectionLayout } from './components/sectionLayout'
@@ -11,6 +11,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { Loading } from './components/loading'
 import { GridCell } from './components/gridCell'
+import { Subtitle } from './components/Subtitle'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -18,14 +19,13 @@ function App() {
   
   const [isMenuModalOpen, setIsMenuModalOpen] = useState(false);
   const [isMenuButtonOn, setIsMenuButtonOn] = useState(false);
-  const [currentSection, setCurrentSection] = useState("aboutMe");
+  const [currentSection, setCurrentSection] = useState("title");
   const [isLoaded, setIsLoaded] = useState(false);
   const [isCellHover, setIsCellHover] = useState(Object.fromEntries(Array.from({ length: 576 }, (_, i) => [i + 1, false])));
   const [isMobile, setIsMobile] = useState(false);
 
   const modalOpenTimerRef = useRef(null);
   const navOnTimerRef = useRef(null);
-  const tlRef = useRef(null);
   const sectionRefs = useRef({
     title: null,
     aboutMe: null,
@@ -33,6 +33,9 @@ function App() {
     projects: null,
     skills: null,
   });
+
+  const tlRef = useRef(null);
+  const tl2Ref = useRef(null);
 
   useGSAP(()=>{
 
@@ -53,104 +56,55 @@ function App() {
       animation: tlRef.current,
       trigger: "#title",
       start: "top top",
-      end: "+=50%",
+      end: "+=20%",
       pin: true,
       onEnter: () => tlRef.current.play(0),
       toggleActions: "complete reverse play reverse",
       scrub: false,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      markers: true,
     },);
-        
+    
     let tl2 = gsap.timeline({delay:3})
-    tl2.to(`#subtitles`, {duration: 0.3, opacity:1, ease: "power2.out"})
+    tl2.to(`#subtitle`, {duration: 0.3, opacity:1, ease: "power2.out"})
       .to(`.menu-button`, {duration: 0.3, opacity:1, ease: "power2.out"}, "<0.1")
-
 
   },[{dependencies: [isLoaded]}])
 
 
-    // useGSAP(()=>{
+  useGSAP(()=>{
 
-    //   // let tl2 = gsap.timeline();
-    //   // tl2.to("#photo", {duration: 0.5,  scale: 1, rotate:360, ease: "power2.out"}, "<0.2")
+    let tl3=gsap.timeline();
+    tl3.to("#name", {duration: 0.3, opacity:1, y:0, ease: "power2.out"},)
+      .to("#summary", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
+      .to("#certification", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
 
-    //   let tl3 = gsap.timeline();
-    //   expData.forEach((_, i)=>{
-    //     tl3.to(
-    //       `#exp-card_${i}`,
-    //       { duration: 0.3, opacity: 1, y: 0, ease: "power2.out" })})
+    ScrollTrigger.create({
+      animation: tl3,
+      trigger: "#aboutMe",
+      start: "top top",
+      end: "+=100%",
+      // pin: true,
+      onEnter: () => tl3.play(),
+      // toggleActions: 'restart none restart none',
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
+    },);
 
-    //   let tl4 = gsap.timeline();
-    //     tl4.to('#project1', {duration: 0.5,  x: 0, ease: "power2.out"})
-    //     .to('#project2', {duration: 0.5,  x: 0, ease: "power2.out" }, "<0.2") 
-      
-    //   let tl5 = gsap.timeline();
-    //   skillData.forEach((item, idx)=>{
-    //     item.skills.forEach((_, i)=>{
-    //       tl5.to(
-    //               `#skill_${idx}_${i}`,
-    //               { duration: 0.3, opacity: 1, scale: 1.2, ease: "sine.in" },
-    //                 i === 0 ? undefined : "<-0.25"
-    //         ).to(
-    //           `#skill_${idx}_${i}`,
-    //             { duration: 0.2, scale: 1, ease: "sine.in" },
-    //             ">"
-    //       )
-    //     })
-    //   })
-      
-    //   // ScrollTrigger.create({
-    //   //   animation: tl2,
-    //   //   trigger: "#aboutMe",
-    //   //   start: "top top",
-    //   //   end: "+=150%",
-    //   //   toggleActions: 'restart none restart none',
-    //   //   onEnter: () => tl2.play(),
-    //   //   invalidateOnRefresh: true,
-    //   // },);
+  },[])
 
-    //   ScrollTrigger.create({
-    //     animation: tl3,
-    //     trigger: "#experiences",
-    //     start: "top center",
-    //     end: "center center",
-    //     scrub: 1,
-    //     toggleActions: 'restart none restart none',
-    //     onEnter: () => tl3.restart(),
-    //     invalidateOnRefresh: true,
-    //     // markers: true
-    //   },);
+  const hanCellOn = (idx) => {
+    setIsCellHover( v => ({...v, [idx]: true}))
+  }
 
-    //   ScrollTrigger.create({
-    //     animation: tl4,
-    //     trigger: "#projects",
-    //     start: "top +=60%",
-    //     toggleActions: 'restart none restart none',
-    //     onEnter: () => tl4.play(),
-    //     invalidateOnRefresh: true,
-    //   },);
-
-    //   ScrollTrigger.create({
-    //     animation: tl5,
-    //     trigger: "#skills",
-    //     start: "top center",
-    //     toggleActions: 'restart none restart none',
-    //     onEnter: () => tl5.play(),
-    //     invalidateOnRefresh: true,
-    //   },);
-
-    // },[])
-
-    const hanCellOn = (idx) => {
-      setIsCellHover( v => ({...v, [idx]: true}))
-    }
-
-    const hanCellOff = (idx) => {
-      setTimeout(() => {
-        setIsCellHover(v => ({ ...v, [idx]: false }));
-      }, 3 * 1000);
-    };
+  const hanCellOff = (idx) => {
+    setTimeout(() => {
+      setIsCellHover(v => ({ ...v, [idx]: false }));
+    }, 5 * 1000);
+  };
 
 
     useEffect(()=>{
@@ -181,11 +135,15 @@ function App() {
       const handleScroll = () => {
 
         if (!sectionRefs?.current) return;
+        const titleTop = sectionRefs.current.title?.getBoundingClientRect().top;
         const aboutMeTop = sectionRefs.current.aboutMe?.getBoundingClientRect().top;
         const experiencesTop = sectionRefs.current.experiences?.getBoundingClientRect().top;
         const projectsTop = sectionRefs.current.projects?.getBoundingClientRect().top;
-        // const skillsTop = sectionRefs.current.getBoundingClientRect().top;
+        const skillsTop = sectionRefs.current.skills?.getBoundingClientRect().top;
         
+        if (titleTop <= 200) {
+          setCurrentSection(sectionRefs.current.title.id)
+        }
         if (aboutMeTop <= 200) {
           setCurrentSection(sectionRefs.current.aboutMe.id)
         }
@@ -194,6 +152,9 @@ function App() {
         }
         if (projectsTop <= 200) {
           setCurrentSection(sectionRefs.current.projects.id)
+        }
+        if (skillsTop <= 200) {
+          setCurrentSection(sectionRefs.current.skills.id)
         }
       }
 
@@ -221,52 +182,52 @@ function App() {
       <main id={'main'} style={{width: "100vw", height: 'auto', overflowX:'hidden', color: "white", position: "relative", }}> 
       
       {/* 타이틀 */}
-        <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', paddingBottom:'25%', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center",}}>
-          
-          <div id={"title1"} style={{width: "150%", display: 'flex', fontWeight: 900, textAlign: "center", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)", fontSize: 'clamp(3.8vw, 38vw, 38vw)', letterSpacing: "-5vw", margin: "auto 0"}}>
-            {title1.map((v, i)=>(
-              <span key={i} id={`char1_${i}`} style={{opacity: 0, scale:0.8, transform: "translateY(-200%)",
-                }}>{v}</span>
-            ))}
-          </div>
+      <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', paddingBottom:'25%', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center",}}>
+        
+        <div id={"title1"} style={{width: "150%", display: 'flex', fontWeight: 900, textAlign: "center", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)", fontSize: 'clamp(3.8vw, 38vw, 38vw)', letterSpacing: "-5vw", margin: "auto 0"}}>
+          {title1.map((v, i)=>(
+            <span key={i} id={`char1_${i}`} style={{opacity: 0, scale:0.8, transform: "translateY(-200%)",
+              }}>{v}</span>
+          ))}
+        </div>
+      </section>
 
-        </section>
+      {/* 자기소개 */}
+      <section style={{backgroundColor: 'var(--color-blue-90)', width: '100%', height: '100vh', padding: '5rem', boxSizing:'border-box'}} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+        <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440, display:'grid', columnGap:'3em', gridTemplateColumns:"1fr 1fr",}}>
 
-        {/* 자기소개 */}
-        <section style={{width: '100%', height: '100vh', position:'relative'}} title={"About me"} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+          <div style={{width: '100%', height: '100%', rowGap:'2em', display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'flex-end'}}>
+            
+            <div id={"name"}>김 진 화</div>
 
-          <img id={"photo"} src={photo} style={{height: '100%', objectFit:'cover', position: 'absolute', zIndex: -1}} alt='photo'/>
-          
-          <div style={{width: '100%', height: '100%', position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(32, 1fr)', gridAutoFlow:'row'}}>
-            {Array.from({length:576}, (_, i)=>(
-              <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
-            ))}
-          </div>
-
-          {/* {`일정이 촉박하거나 업무 진척이 예정보다 늦어질 때에도 개인 시간을 투자해서라도 끈기 있게 해냈습니다.
-            또, 다양한 자격증들도 단기간에 취득할 만큼 학습 능력도 자신 있습니다.`}
-            <span className='slogan'>
-              <span>{slogan.map((v, i)=>(
-                <span key={i} id={`char_${i}`}>{v}</span>
-              ))}</span>
-            </span> 는 마음으로 개발자의 꿈을 꾸게 되었습니다.
-          <div>
-            {certiData.map((v)=>(
-              <div key={v.title}>
-                {v.title} <span key={v.title}>{v.date} / {v.authority}</span><br/>
-              </div>
-            ))}
-          </div> */}
-
-          <div>
             <div id={"summary"}>
+              끈기 / 집요함 / 빠른 습득력<br/><br/>
               📞 010-8835-7380<br/>
               ✉️ 12cometome@naver.com<br/>
               🏠 서울 강남구 역삼동 거주<br/>
               🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
             </div>
+            
+            <div id={"certification"}>
+              {certiData.map((v)=>(
+                <div key={v.title}>
+                  {v.title} <span key={v.title}>{v.date} / {v.authority}</span><br/>
+                </div>
+              ))}
+            </div>
           </div>
-        </section>
+
+          <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center'}}>
+            <img id={"photo"} src={photo} style={{width: 'calc(100% - 5rem)', margin: 'auto', maxWidth:550, objectFit:'contain', }} alt='photo'/>
+            <div style={{width: 'calc(100% - 5rem)', height: '100%', position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(10, 1fr)'}}>
+              {Array.from({length:80}, (_, i)=>(
+                <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
+              ))}
+            </div>
+          </div>
+
+        </div>
+      </section>
         
         {/* 경력 */}
         {/* <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
@@ -299,11 +260,7 @@ function App() {
       </main>
 
       <Loading isLoaded={isLoaded}/>
-      <div id={'subtitles'} style={{display: 'flex', height:'1.9em', overflow: 'hidden', flexDirection:'column', color:'white', position: 'fixed', top: '2rem', left: '2rem', fontSize: '1.5em'}}>
-        {subtitles.map((v, i)=>(
-          <span key={i} style={{padding:'0.2em 0'}}>{v}</span>
-        ))}
-      </div>
+      <Subtitle currentSection={currentSection}/>
       <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
       <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection} setCurrentSection={setCurrentSection}/>
 

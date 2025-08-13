@@ -11,7 +11,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { Loading } from './components/loading'
 import { GridCell } from './components/gridCell'
-import { Subtitle } from './components/Subtitle'
+import { Subtitle } from './components/subtitle'
+import { ExpCard } from './components/components'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -36,6 +37,7 @@ function App() {
 
   const tlRef = useRef(null);
   const tl2Ref = useRef(null);
+  const tl3Ref = useRef(null);
 
   useGSAP(()=>{
 
@@ -54,47 +56,70 @@ function App() {
 
     ScrollTrigger.create({
       animation: tlRef.current,
-      trigger: "#title",
+      trigger: '#title',
       start: "top top",
-      end: "+=20%",
-      pin: true,
+      end: "+=30%",
+      pin: '#title',
       onEnter: () => tlRef.current.play(0),
-      toggleActions: "complete reverse play reverse",
-      scrub: false,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      markers: true,
-    },);
-    
-    let tl2 = gsap.timeline({delay:3})
-    tl2.to(`#subtitle`, {duration: 0.3, opacity:1, ease: "power2.out"})
-      .to(`.menu-button`, {duration: 0.3, opacity:1, ease: "power2.out"}, "<0.1")
-
-  },[{dependencies: [isLoaded]}])
-
-
-  useGSAP(()=>{
-
-    let tl3=gsap.timeline();
-    tl3.to("#name", {duration: 0.3, opacity:1, y:0, ease: "power2.out"},)
-      .to("#summary", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
-      .to("#certification", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
-
-    ScrollTrigger.create({
-      animation: tl3,
-      trigger: "#aboutMe",
-      start: "top top",
-      end: "+=100%",
-      // pin: true,
-      onEnter: () => tl3.play(),
-      // toggleActions: 'restart none restart none',
-      scrub: 1,
+      toggleActions: "complete none play none",
+      // scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       // markers: true,
     },);
+    
+    let tl2 = gsap.timeline({delay:2.5})
+    tl2.to(`#subtitle`, {duration: 0.3, opacity:1, ease: "power2.out"})
+      .to(`.menu-button`, {duration: 0.3, opacity:1, ease: "power2.out"}, "<0.1")
 
-  },[])
+  },{dependencies: [isLoaded]})
+
+
+  useGSAP(()=>{
+
+    tl2Ref.current=gsap.timeline();
+    tl2Ref.current.to("#name", {duration: 0.3, opacity:1, y:0, ease: "power2.out"},)
+      .to("#summary", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
+      .to("#certification", {duration: 0.3,  opacity:1, y:0, ease: "power2.out"}, "<0.1")
+
+    ScrollTrigger.create({
+      animation: tl2Ref.current,
+      trigger: "#aboutMe",
+      start: "top 20%",
+      end: "+=80%",
+      // pin: "#abo-utMe",
+      onEnter: () => tl2Ref.current.play(),
+      toggleActions: 'play reverse restart reverse',
+      // scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
+    });
+
+    tl3Ref.current=gsap.timeline();
+    expData.forEach((_, i)=>{
+      tl3Ref.current.to(
+        `#exp-card_${i}`,
+        { duration: 1.5, x: 0, opacity: 1, ease: "power2.out"},
+          i === 0 ? "" : "<0.2")
+    })
+
+    ScrollTrigger.create({
+      animation: tl3Ref.current,
+      trigger: "#experiences",
+      start: "top top",
+      end: "+=80%",
+      // pin: "#abo-utMe",
+      onEnter: () => tl3Ref.current.play(),
+      toggleActions: 'play reverse restart reverse',
+      // scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      markers: true,
+    });
+
+
+  },{})
 
   const hanCellOn = (idx) => {
     setIsCellHover( v => ({...v, [idx]: true}))
@@ -199,13 +224,13 @@ function App() {
           <div style={{width: '100%', height: '100%', rowGap:'2em', display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'flex-end'}}>
             
             <div id={"name"}>김 진 화</div>
-
             <div id={"summary"}>
               끈기 / 집요함 / 빠른 습득력<br/><br/>
               📞 010-8835-7380<br/>
               ✉️ 12cometome@naver.com<br/>
               🏠 서울 강남구 역삼동 거주<br/>
-              🏫 동덕여자대학교 국어국문학 졸업 <span>2008.03 - 2012.08</span>
+              🏫 동덕여자대학교 국어국문학 졸업 
+              {/* <span>2008.03 - 2012.08</span> */}
             </div>
             
             <div id={"certification"}>
@@ -215,6 +240,7 @@ function App() {
                 </div>
               ))}
             </div>
+            
           </div>
 
           <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center'}}>
@@ -230,25 +256,22 @@ function App() {
       </section>
         
         {/* 경력 */}
-        {/* <SectionLayout title={"Experiences"} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
+        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
+          <div>
             {expData.map((v, i)=>(
               <ExpCard key={v.company} company={v.company} department={v.department} duration={v.duraiton} description={v.description} idx={i}/>
             ))}
-        </SectionLayout> */}
+          </div> 
+        </section>
 
         {/* 프로젝트 */}
-        {/* <SectionLayout title={"Projects"} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          <div id={`project1`}>
-            {projectData.slice(0,3).map((v,i)=>(
+        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
+          <div id={`project`}>
+            {projectData.map((v,i)=>(
               <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
             ))}
           </div>
-          <div id={`project2`}>
-            {projectData.slice(3, projectData.length).map((v,i)=>(
-              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i+3}/>
-            ))}
-          </div>
-        </SectionLayout> */}
+        </section>
 
         {/* 스킬 */}
         {/* <SectionLayout title={"Skills"} id={"skills"} ref={el => sectionRefs.current.skills = el}>

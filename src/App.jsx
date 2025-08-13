@@ -39,6 +39,7 @@ function App() {
   const tl2Ref = useRef(null);
   const tl3Ref = useRef(null);
   const tl4Ref = useRef(null);
+  const tl5Ref = useRef(null);
 
   useGSAP(()=>{
 
@@ -86,8 +87,8 @@ function App() {
     ScrollTrigger.create({
       animation: tl2Ref.current,
       trigger: "#aboutMe",
-      start: "top 20%",
-      end: "+=80%",
+      start: "top top+=30%",
+      end: "+=30%",
       // pin: "#aboutMe",
       onEnter: () => tl2Ref.current.play(),
       toggleActions: 'play none restart none',
@@ -133,14 +134,44 @@ function App() {
       end: "+=250%",
       pin: true,
       onEnter: () => tl4Ref.current.play(),
-      toggleActions: 'play none restart none',
+      // onEnterBack: () => tl4Ref.current.progress(1),
+      toggleActions: 'play reverse none none',
       scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       // markers: true,
     });
 
-  },{})
+    tl5Ref.current=gsap.timeline();
+
+    skillData.forEach((item, idx)=>{
+      item.skills.forEach((_, i)=>{
+        tl5Ref.current.to(
+          `#skill_${idx}_${i}`,
+          { duration: 0.3, opacity: 1, scale: 1.2, ease: "sine.in" },
+            i === 0 ? undefined : "<-0.25"
+        ).to(
+          `#skill_${idx}_${i}`,
+            { duration: 0.2, scale: 1, ease: "sine.in" },
+            ">"
+        )
+    })})
+
+    ScrollTrigger.create({
+      animation: tl5Ref.current,
+      trigger: "#skills",
+      start: "top top",
+      // end: "+=250%",
+      // pin: true,
+      onEnter: () => tl5Ref.current.play(),
+      toggleActions: 'play none restart none',
+      // scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
+    });
+
+  },{dependencies: []})
 
   const hanCellOn = (idx) => {
     setIsCellHover( v => ({...v, [idx]: true}))
@@ -270,8 +301,8 @@ function App() {
           </div>
 
           <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center'}}>
-            <img id={"photo"} src={photo} style={{width: 'calc(100% - 5rem)', margin: 'auto', maxWidth:550, objectFit:'contain', }} alt='photo'/>
-            <div style={{width: 'calc(100% - 5rem)', height: '100%', position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(10, 1fr)'}}>
+            <img src={photo} style={{width: '100%', margin: 'auto', maxWidth:550, objectFit:'contain', }} alt='photo'/>
+            <div style={{width: '100%', margin: 'auto', height: '100%', maxWidth:550, position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(10, 1fr)'}}>
               {Array.from({length:80}, (_, i)=>(
                 <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
               ))}
@@ -302,10 +333,12 @@ function App() {
         </section>
 
         {/* 스킬 */}
-        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          {skillData.map((v, i)=>(
-            <SkillCard key={i} description={v.description} skills={v.skills} idx={i}/>
-          ))}
+        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"skills"} ref={el => sectionRefs.current.skills = el}>
+          <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440, display: 'flex', flexDirection:'column', justifyContent:'center', gap:'2em'}}>
+            {skillData.map((v, i)=>(
+              <SkillCard key={i} description={v.description} skills={v.skills} idx={i}/>
+            ))}
+          </div>
         </section>
 
       </main>

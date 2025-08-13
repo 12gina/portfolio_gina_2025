@@ -53,158 +53,6 @@ body {
   scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 }
 
-// main {
-//   width: 100vw;
-//   height: 100vh;
-//   color: white;
-//   overflow-x: hidden;
-//   > video {
-//     height: 100%;
-//     width: 100%;
-//     position: absolute;
-//     inset: 0; // top, right, bottom, left 전부 0
-//     object-fit: cover;
-//   }
-// }
-
-// 타이틀
-// #title {
-//   height: 100vh;
-//   width: 100%;
-//   display: flex;
-//   place-items: center;
-//   // position: relative;
-//   z-index: 1;
-//   > div {
-//     width: 100%;
-//     line-height: 1.5;
-//     color: white;
-//     text-align: center;
-//     white-space: pre-line;
-//     font-size: clamp(0.3vw, 3vw, 30rem);
-//     text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.5);
-//     > div {
-//       width: 100%;
-//       display: flex;
-//       justify-content: center;
-//       padding: 1rem 0;
-//       > span {
-//         display: block;
-//       }
-
-//       &:nth-of-type(1) {
-//         > span {
-//           // transform: translateY(-70%);
-//         }
-//       }
-
-//       &:nth-of-type(2) {
-//         width: 100%;
-//         height: calc(6rem + 2px);
-//         justify-content: space-between;
-//         > div {
-//           flex: 1;
-//           height: 2px;
-//           background-color: white;
-//           margin: 3rem 0;
-//           &:nth-of-type(1){
-//             transform: translateX(-100%);
-//           }
-//           &:nth-of-type(2){
-//             transform: translateX(100%);
-//           }
-//         }
-//       }
-
-//       &:nth-of-type(3) {
-//         > span {
-//           // transform: translateY(70%);
-//         }
-//       }
-//     }
-//     > div:nth-of-type(1), div:nth-of-type(3) {
-//       column-gap: 3rem;
-//       > span {
-//         // opacity: 0;
-//         // scale: 5;
-//         scale: 1;
-//       }
-//     }
-
-//     @include respond(sm) {
-//       font-size: 3.5rem;
-//       // padding: 0 2rem;
-//       > div:nth-of-type(2) {
-//         > span {
-//           > span:nth-of-type(1) {
-//             font-size: 5rem;
-//           }
-//           > span:nth-of-type(2) {
-//             font-size: 2rem
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
-// 자기소개
-// #aboutMe {
-//   background-color: var(--color-blue-90);
-//   white-space: pre-line;
-//   > div {
-//     > div:nth-of-type(2) {
-//       line-height: 1.8;
-//       display: flex;
-//       flex-direction: column;
-//       row-gap: 1.2em;
-//       > div >.slogan {
-//         margin-bottom: -2.2em;
-//         overflow: hidden;
-//         display: inline-block;
-//         > span {
-//           font-size: 3em;
-//           > span {
-//             display: inline-block;
-//             transform: translateY(-100%);
-//           }
-//         }
-//       }
-      
-//       // 자격증
-//       > div:nth-of-type(2) {
-//         > div{
-//           > span {
-//             color: var(--color-gray-50);
-//           }
-//         }
-//       }
-
-//       // 사진 & 연락처
-//       > div:nth-of-type(3) {
-//         display: grid;
-//         grid-template-columns: 7em 1fr;
-//         column-gap: 2rem;
-//         align-items: center;
-//         > img {
-//           scale: 0;
-//           width: 100%;
-//         }
-//         > div {
-//           width: calc(100% - 2rem);
-//           padding: 2rem;
-//           box-sizing: border-box;
-//           border: 1px solid white;
-//           border-radius: 20px;
-//           > span {
-//             color: var(--color-gray-50);
-//           }
-//         }
-//       }
-//     }
-//   }
-// }
-
 #subtitle {
   height: 1.9em;
   overflow: hidden;
@@ -269,13 +117,9 @@ body {
     background-color:var(--color-blue-90);
     overflow: hidden;
     > img {
-      height: 95%;
+      width: 95%;
       object-fit: contain;
     }
-  }
-
-  #c35, #c26  {
-    background-color: transparent;
   }
 }
 
@@ -300,13 +144,6 @@ body {
     max-width: 1440px;
     height: 100%;
     > div {
-      // align-items: center;
-      // justify-content: center;
-      // display: grid;
-      // grid-template-columns: repeat(5, 1fr);
-      // column-gap: 8em;
-      // grid-auto-flow: row;
-      // grid-template-rows: repeat(2, 1fr);
       width: 100%;
       height: 100%;
       position: relative;
@@ -316,13 +153,7 @@ body {
 
 // skill
 #skills {
-  color: var(--color-black);
   > div {
-    > div:nth-of-type(2) {
-      display: flex;
-      flex-direction: column;
-      gap: 2em;
-    }
   }
 }
   
@@ -373,33 +204,43 @@ nav {
       align-items: flex-end;
 
       > span:nth-of-type(3) {
-        font-size: clamp( 0.1vw, 2.6vw, 2.6em);
+        scale: 0.9;
         letter-spacing: -1px;
+        transform: translateX(0.7em);
       }
       > span, div {
         opacity: 0.7;
         transition: opacity 0.3s ease;
-        &:hover {
-          opacity: 1;
-          color: var(--color-black);
-        }
+      }
+      > span:hover {
+        opacity: 1;
       }
       > span:nth-of-type(1) {
         opacity: 1;
         cursor:default;
-        &:hover {
-          opacity: 1;
-        }
       }
       > div {
         display: flex;
-        column-gap: 1.5vw;
+        column-gap: 0.5em;
         align-items: center;
-        > a > img {
-          width: 3.4vw;
-          opacity: 0.8;
-          margin-top: 0.5vw;
+        > a {
+          > img {
+            margin-top: 0.4em;
+            opacity: 0.6;
+          }
+          > span {
+            color: black;
+            opacity: 0.6;
+          }
+        > img, span  {
+          width: 1em;
+          transition: opacity 0.3s ease;
+          &:hover {
+            opacity: 1;
+          }
         }
+      }
+
       }
     }
   }
@@ -498,7 +339,7 @@ top: 18%;
   }
   
   @include respond(overMd) {
-top: 3rem;
+    top: 3rem;
     right: 3rem;
     width: 2.5rem;
     row-gap: 1.2rem;
@@ -508,7 +349,7 @@ top: 3rem;
     width: 2.7rem;
     row-gap: 0.7rem;
     right: 5%;
-top: 3%;
+    top: 3%;
   }
   &.on {
     > span {
@@ -738,7 +579,7 @@ top: 3%;
 .skill-card {
   padding: 1.5rem 1.5em 3em 1.5em;
   box-sizing: border-box;
-  border-bottom: 1px solid var(--color-gray-50);
+  border-bottom: 1px solid white;
   width: 100%;
   height: auto;
   display: flex;
@@ -772,9 +613,9 @@ top: 3%;
         padding: 0.1rem 0.2rem;
         white-space: nowrap;
         color: var(--color-gray-80);
-        z-index: 2;
+        z-index: 20;
         left: 2rem;
-    top: -1rem;
+        top: -1rem;
         opacity: 0;
       }
       &:hover{
@@ -880,16 +721,15 @@ top: 3%;
 .loading {
   width: 100vw;
   height: 100vh;
-  background-color: black;
+  background-color: var(--color-blue-30);
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 20;
   display: grid;
   font-size: 3rem;
   font-weight: 700;
   transition: opacity 0.3s ease;
-  color: var(--color-yellow-dark);
+  color: white;
   > * {
     margin: auto;
     grid-column: 1 / sapn 1;

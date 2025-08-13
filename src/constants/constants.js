@@ -65,7 +65,6 @@ export const projectData = [
     {image: img7, device: "", title:"키업패스 관리자웹", description:"출입인증 앱 관리자 사이트", task:"· 유지 보수\n· 전체 코드 리팩토링\n· 신규 기능(키오스크 스크린 모니터링 등) 구현", skills:[sk_react, sk_typescript, sk_zustand, sk_tailwind, sk_socket, sk_sass, sk_pm2], href: "https://jazzy-sugar-dbf.notion.site/247c2302398080e7b669cce8fbf881cb"},
     {image: img5, device: "", title:"시즌마켓(도매)", description:"제주 특산 농수산물 및 김치 도매 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_react, sk_sass,], href:"https://jazzy-sugar-dbf.notion.site/17ac230239808132b464ceb9b610416b"},
     {image: img4, device: "", title:"시즌마켓(소매)", description:"제주 특산 농수산물 쇼핑몰", task:"· 신규 사이트 프론트엔드 전체 구현", skills:[sk_next, sk_typescript, sk_sass], href:"https://jazzy-sugar-dbf.notion.site/17ac23023980815390b2d6f8e490dc87"},
-    {image: "", device: "", title:"", description:"", task:"", skills:[]},
     {image: img3, device: "", title:"프로지스트 홈페이지", description:"회사(IT, 웹/플랫폼 개발사) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac23023980813ea5ffc29ccea48d80"},
     {image: img2, device: "", title:"만쿠무역 ERP 앱", description:"회사(무역) ERP 앱", task:"· 신규 앱 프론트 구현", skills:[sk_electron, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac2302398081f9aaaaf40bc8417830"},
     {image: img1, device: "", title:"만쿠무역 홈페이지", description:"회사(무역) 홈페이지", task:"· 신규 사이트 전체 구현", skills:[sk_react, sk_sass, sk_gsap], href:"https://jazzy-sugar-dbf.notion.site/17ac2302398081f1ab30db323f57fc3a"},

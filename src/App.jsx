@@ -11,8 +11,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 import { Loading } from './components/loading'
 import { GridCell } from './components/gridCell'
-import { Subtitle } from './components/subtitle'
-import { ExpCard } from './components/components'
+import { ExpCard, ProjectCard, SkillCard } from './components/components'
+import { Subtitle } from './components/Subtitle'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +38,7 @@ function App() {
   const tlRef = useRef(null);
   const tl2Ref = useRef(null);
   const tl3Ref = useRef(null);
+  const tl4Ref = useRef(null);
 
   useGSAP(()=>{
 
@@ -61,7 +62,7 @@ function App() {
       end: "+=30%",
       pin: '#title',
       onEnter: () => tlRef.current.play(0),
-      toggleActions: "complete none play none",
+      toggleActions: "complete reverse play reverse",
       // scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -87,9 +88,9 @@ function App() {
       trigger: "#aboutMe",
       start: "top 20%",
       end: "+=80%",
-      // pin: "#abo-utMe",
+      // pin: "#aboutMe",
       onEnter: () => tl2Ref.current.play(),
-      toggleActions: 'play reverse restart reverse',
+      toggleActions: 'play none restart none',
       // scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -107,17 +108,37 @@ function App() {
     ScrollTrigger.create({
       animation: tl3Ref.current,
       trigger: "#experiences",
-      start: "top top",
+      start: "top top+=30%",
       end: "+=80%",
-      // pin: "#abo-utMe",
       onEnter: () => tl3Ref.current.play(),
       toggleActions: 'play reverse restart reverse',
       // scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      markers: true,
+      // markers: true,
     });
 
+    tl4Ref.current=gsap.timeline();
+    projectData.forEach((_, i)=>{
+      tl4Ref.current.to(
+        `#project-card_${i}`,
+        { duration: 1, y: 0, opacity: 1, ease: "power2.out"},
+          i === 0 ? "" : ">-0.2")
+    })
+
+    ScrollTrigger.create({
+      animation: tl4Ref.current,
+      trigger: "#projects",
+      start: "top top",
+      end: "+=250%",
+      pin: true,
+      onEnter: () => tl4Ref.current.play(),
+      toggleActions: 'play none restart none',
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      // markers: true,
+    });
 
   },{})
 
@@ -131,70 +152,75 @@ function App() {
     }, 5 * 1000);
   };
 
+  useEffect(()=>{
+      if (currentSection!=='aboutMe') {
+          setIsCellHover(Object.fromEntries(Array.from({ length: 576 }, (_, i) => [i + 1, false])))
+      }
+  }, [currentSection])
 
-    useEffect(()=>{
-        if (isMenuButtonOn) {
-            modalOpenTimerRef.current = setTimeout(()=>setIsMenuModalOpen(true), 300)
-        }
-    }, [isMenuButtonOn])
+  useEffect(()=>{
+      if (isMenuButtonOn) {
+          modalOpenTimerRef.current = setTimeout(()=>setIsMenuModalOpen(true), 300)
+      }
+  }, [isMenuButtonOn])
 
-    useEffect(()=>{
-        if (!isMenuModalOpen) {
-            modalOpenTimerRef.current = setTimeout(()=>setIsMenuButtonOn(false), 300)
-        } 
-    }, [isMenuModalOpen])
+  useEffect(()=>{
+      if (!isMenuModalOpen) {
+          modalOpenTimerRef.current = setTimeout(()=>setIsMenuButtonOn(false), 300)
+      } 
+  }, [isMenuModalOpen])
+  
+  useEffect(()=>{
+    window.scrollTo(0, 0);
     
-    useEffect(()=>{
-      window.scrollTo(0, 0);
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    handleResize();
+
+    const handleScroll = () => {
+
+      if (!sectionRefs?.current) return;
+      const titleTop = sectionRefs.current.title?.getBoundingClientRect().top;
+      const aboutMeTop = sectionRefs.current.aboutMe?.getBoundingClientRect().top;
+      const experiencesTop = sectionRefs.current.experiences?.getBoundingClientRect().top;
+      const projectsTop = sectionRefs.current.projects?.getBoundingClientRect().top;
+      const skillsTop = sectionRefs.current.skills?.getBoundingClientRect().top;
       
-      const handleResize = () => {
-        if (window.innerWidth <= 480) {
-          setIsMobile(true);
-        } else {
-          setIsMobile(false);
-        }
-      };
-
-      handleResize();
-
-      const handleScroll = () => {
-
-        if (!sectionRefs?.current) return;
-        const titleTop = sectionRefs.current.title?.getBoundingClientRect().top;
-        const aboutMeTop = sectionRefs.current.aboutMe?.getBoundingClientRect().top;
-        const experiencesTop = sectionRefs.current.experiences?.getBoundingClientRect().top;
-        const projectsTop = sectionRefs.current.projects?.getBoundingClientRect().top;
-        const skillsTop = sectionRefs.current.skills?.getBoundingClientRect().top;
-        
-        if (titleTop <= 200) {
-          setCurrentSection(sectionRefs.current.title.id)
-        }
-        if (aboutMeTop <= 200) {
-          setCurrentSection(sectionRefs.current.aboutMe.id)
-        }
-        if (experiencesTop <= 200) {
-          setCurrentSection(sectionRefs.current.experiences.id)
-        }
-        if (projectsTop <= 200) {
-          setCurrentSection(sectionRefs.current.projects.id)
-        }
-        if (skillsTop <= 200) {
-          setCurrentSection(sectionRefs.current.skills.id)
-        }
+      if (titleTop <= 200) {
+        setCurrentSection(sectionRefs.current.title.id)
       }
-
-      window.addEventListener('scroll', handleScroll)
-      window.addEventListener("resize", handleResize);
-
-      return ()=>{
-          setIsLoaded(false);
-          clearTimeout(modalOpenTimerRef);
-          clearTimeout(navOnTimerRef);
-          window.removeEventListener('resize', handleResize);
-          window.removeEventListener('scroll', handleScroll);
+      if (aboutMeTop <= 200) {
+        setCurrentSection(sectionRefs.current.aboutMe.id)
       }
+      if (experiencesTop <= 200) {
+        setCurrentSection(sectionRefs.current.experiences.id)
+      }
+      if (projectsTop <= 200) {
+        setCurrentSection(sectionRefs.current.projects.id)
+      }
+      if (skillsTop <= 200) {
+        setCurrentSection(sectionRefs.current.skills.id)
+      }
+    }
 
-    }, [])
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener("resize", handleResize);
+
+    return ()=>{
+        setIsLoaded(false);
+        clearTimeout(modalOpenTimerRef);
+        clearTimeout(navOnTimerRef);
+        window.removeEventListener('resize', handleResize);
+        window.removeEventListener('scroll', handleScroll);
+    }
+
+  }, [])
 
   return (
     <>
@@ -266,19 +292,21 @@ function App() {
 
         {/* 프로젝트 */}
         <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          <div id={`project`}>
-            {projectData.map((v,i)=>(
-              <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
-            ))}
+          <div>
+            <div>
+              {projectData.map((v,i)=>(
+                <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
+              ))}
+            </div>
           </div>
         </section>
 
         {/* 스킬 */}
-        {/* <SectionLayout title={"Skills"} id={"skills"} ref={el => sectionRefs.current.skills = el}>
+        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
           {skillData.map((v, i)=>(
             <SkillCard key={i} description={v.description} skills={v.skills} idx={i}/>
           ))}
-        </SectionLayout> */}
+        </section>
 
       </main>
 

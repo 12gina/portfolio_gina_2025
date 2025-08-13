@@ -50,21 +50,19 @@ export const ExpCard = ({company, idx, department, duration, description}) => (
     </article>
 )
 
-export const ProjectCard = ({title, image, skills, description, idx=0, href, task, device=""}) => (
-    <article className={`project-card`} id={`project-card_${idx}`}>
-        {idx===0 && <div className="empty-block"/>}
-        <a className={`${image? "image":"empty-block"} ${device}`} href={href} target="_blank" rel="noopener noreferrer">
-            {image && <img src={image} alt="image"/>}
+export const ProjectCard = ({x, y, title, image, skills, description, idx=0, href, task, device=""}) => (
+    <article className={`project-card i${idx}`}>
+        <a  id={`project-card_${idx}`} className={`${"image"} ${device}`} href={href} target="_blank" rel="noopener noreferrer">
+            <img src={image} alt="image"/>
             <div>
-                <div>{title}</div>
-                {/* <div>{description}</div> */}
-                <div className={`${device==="kiosk"? "wrap":""}`}>{task}</div>
+                <span>{title}</span>
+                <span>{description}</span>
+                <span className={`${device==="kiosk"? "wrap":""}`}>{task}</span>
                 <div>{skills.map((v, i)=>(
                     <img key={i} src={v} alt="skill icon"/>))}
                 </div>
             </div>
         </a>
-        {idx===2 &&<div className="empty-block"/>}
     </article>
 )
 

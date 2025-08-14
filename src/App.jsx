@@ -256,6 +256,10 @@ function App() {
 
   return (
     <>
+      <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline
+        style={{width: "100%", height: '100vh', position:"fixed", inset:0, color: "white", overflowX: "hidden", objectFit:'cover', zIndex: -1 }}>
+        <source src={introVideo} type="video/mp4"/>
+      </video>
       
       <main id={'main'} style={{width: "100vw", height: '100%', overflowX:'hidden', color: "white", position: "relative", }}> 
       
@@ -344,7 +348,6 @@ function App() {
       <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
       <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection} setCurrentSection={setCurrentSection}/>
       
-
     </>
   )
 }

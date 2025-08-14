@@ -64,7 +64,7 @@ function App() {
       end: "+=10%",
       pin: `#title`,
       toggleActions: "play reverse play reverse",
-      markers: true,
+      // markers: true,
     },);
     
     let tl2 = gsap.timeline({delay:2.5})

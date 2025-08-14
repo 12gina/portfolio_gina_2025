@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import introVideo from "./assets/intro.mp4"
 import photo from "./assets/images/photo.jpg"
 import './styles/index.scss'
-import { certiData, expData, projectData, skillData, slogan, title1, title2 } from './constants/constants'
+import { certiData, expData, projectData, skillData, title1 } from './constants/constants'
 import { MenuModal } from './components/menuModal'
 import { MenuButton } from './components/menuButton'
-import { SectionLayout } from './components/sectionLayout'
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
@@ -35,7 +34,8 @@ function App() {
     skills: null,
   });
 
-  const tlRef = useRef(null);
+  // const tlRef = useRef(null);
+  const tlCopy = useRef(null);
   const tl2Ref = useRef(null);
   const tl3Ref = useRef(null);
   const tl4Ref = useRef(null);
@@ -44,30 +44,27 @@ function App() {
   useGSAP(()=>{
 
     if (!isLoaded) return;
-    if (tlRef.current) return;
+    if (tlCopy.current) return;
 
-    tlRef.current = gsap.timeline({paused: true});
+    tlCopy.current = gsap.timeline({paused:true});
 
     title1.forEach((_, i)=>{
-      tlRef.current.to(
+      tlCopy.current.to(
         `#char1_${i}`,
-        { duration: 2, y: "40%", scale: 1, opacity: 0.5, ease: "power2.out",
+        { duration: 2, y: "40%", scale: 1, opacity: 0.5, ease: "power2.inOut",
           rotate: i===0?"-10deg":i===1?"20deg":i===2?"-5deg":i===3?"10deg":"5deg"},
           i === 0 ? "<0.1" : "<0.3")
     })
+    
 
     ScrollTrigger.create({
-      animation: tlRef.current,
+      animation: tlCopy.current,
       trigger: '#title',
       start: "top top",
-      end: "+=30%",
-      pin: '#title',
-      onEnter: () => tlRef.current.play(0),
-      toggleActions: "complete reverse play reverse",
-      // scrub: true,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      // markers: true,
+      end: "+=10%",
+      pin: `#title`,
+      toggleActions: "play reverse play reverse",
+      markers: true,
     },);
     
     let tl2 = gsap.timeline({delay:2.5})
@@ -87,11 +84,11 @@ function App() {
     ScrollTrigger.create({
       animation: tl2Ref.current,
       trigger: "#aboutMe",
-      start: "top top+=30%",
-      end: "+=30%",
+      start: "top top+=20%",
+      end: "+=80%",
       // pin: "#aboutMe",
       onEnter: () => tl2Ref.current.play(),
-      toggleActions: 'play none restart none',
+      toggleActions: 'play reverse restart reverse',
       // scrub: 1,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -109,12 +106,13 @@ function App() {
     ScrollTrigger.create({
       animation: tl3Ref.current,
       trigger: "#experiences",
-      start: "top top+=30%",
+      start: "top top+=20%",
       end: "+=80%",
-      onEnter: () => tl3Ref.current.play(),
+      // pin: '#projects',
+      // onEnter: () => tl3Ref.current.play(),
       toggleActions: 'play reverse restart reverse',
       // scrub: 1,
-      anticipatePin: 1,
+      // anticipatePin: 1,
       invalidateOnRefresh: true,
       // markers: true,
     });
@@ -129,15 +127,15 @@ function App() {
 
     ScrollTrigger.create({
       animation: tl4Ref.current,
-      trigger: "#projects",
-      start: "top top",
+      trigger: "#projects-wrap",
+      start: "top top+=10%",
       end: "+=250%",
-      pin: true,
-      onEnter: () => tl4Ref.current.play(),
+      pin: '#projects',
+      // onEnter: () => tl4Ref.current.play(),
       // onEnterBack: () => tl4Ref.current.progress(1),
       toggleActions: 'play reverse none none',
       scrub: 1,
-      anticipatePin: 1,
+      anticipatePin: 5,
       invalidateOnRefresh: true,
       // markers: true,
     });
@@ -160,10 +158,11 @@ function App() {
     ScrollTrigger.create({
       animation: tl5Ref.current,
       trigger: "#skills",
-      start: "top top",
-      // end: "+=250%",
+      start: "top top+=20%",
+      end: "center center",
       // pin: true,
-      onEnter: () => tl5Ref.current.play(),
+      // onEnter: () => tl5Ref.current.play(),
+      onEnterBack: ()=>tl5Ref.current.restart(),
       toggleActions: 'play none restart none',
       // scrub: 1,
       anticipatePin: 1,
@@ -202,6 +201,7 @@ function App() {
   }, [isMenuModalOpen])
   
   useEffect(()=>{
+
     window.scrollTo(0, 0);
     
     const handleResize = () => {
@@ -242,6 +242,7 @@ function App() {
 
     window.addEventListener('scroll', handleScroll)
     window.addEventListener("resize", handleResize);
+    ScrollTrigger.refresh();
 
     return ()=>{
         setIsLoaded(false);
@@ -255,18 +256,13 @@ function App() {
 
   return (
     <>
-
-      <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline
-        style={{width: "100%", height: '100vh', position:"fixed", inset:0, color: "white", overflowX: "hidden", objectFit:'cover', zIndex: -1 }}>
-        <source src={introVideo} type="video/mp4"/>
-      </video>
       
-      <main id={'main'} style={{width: "100vw", height: 'auto', overflowX:'hidden', color: "white", position: "relative", }}> 
+      <main id={'main'} style={{width: "100vw", height: '100%', overflowX:'hidden', color: "white", position: "relative", }}> 
       
       {/* 타이틀 */}
       <section id={"title"} ref={el => sectionRefs.current.title = el} style={{width: "100%", height: '100vh', paddingBottom:'25%', display: 'flex', flexDirection: "column", justifyContent: "flex-end", alignItems:"center",}}>
         
-        <div id={"title1"} style={{width: "150%", display: 'flex', fontWeight: 900, textAlign: "center", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)", fontSize: 'clamp(3.8vw, 38vw, 38vw)', letterSpacing: "-5vw", margin: "auto 0"}}>
+        <div id={"title1"} style={{height:'100%', width: "150%", display: 'flex', fontWeight: 900, textAlign: "center", justifyContent: "center", textShadow: "5px 5px 3px rgba(0, 0, 0, 0.5)", fontSize: 'clamp(3.8vw, 38vw, 38vw)', letterSpacing: "-5vw", margin: "auto 0"}}>
           {title1.map((v, i)=>(
             <span key={i} id={`char1_${i}`} style={{opacity: 0, scale:0.8, transform: "translateY(-200%)",
               }}>{v}</span>
@@ -278,7 +274,7 @@ function App() {
       <section style={{backgroundColor: 'var(--color-blue-90)', width: '100%', height: '100vh', padding: '5rem', boxSizing:'border-box'}} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
         <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440, display:'grid', columnGap:'3em', gridTemplateColumns:"1fr 1fr",}}>
 
-          <div style={{width: '100%', height: '100%', rowGap:'2em', display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'flex-end'}}>
+          <div style={{width: '100%', height: '100%', rowGap:'2em', display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'flex-end', overflowY: 'hidden'}}>
             
             <div id={"name"}>김 진 화</div>
             <div id={"summary"}>
@@ -300,9 +296,9 @@ function App() {
             
           </div>
 
-          <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center'}}>
-            <img src={photo} style={{width: '100%', margin: 'auto', maxWidth:550, objectFit:'contain', }} alt='photo'/>
-            <div style={{width: '100%', margin: 'auto', height: '100%', maxWidth:550, position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(10, 1fr)'}}>
+          <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center', overflowY: 'hidden'}}>
+            <img src={photo} style={{width: '100%', margin: 'auto', maxWidth:550, objectFit:'contain'}} alt='photo'/>
+            <div style={{width: '100%', margin: 'auto', maxWidth:550, position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(9, 1fr)'}}>
               {Array.from({length:80}, (_, i)=>(
                 <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
               ))}
@@ -323,7 +319,7 @@ function App() {
 
         {/* 프로젝트 */}
         <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
-          <div>
+          <div id={"projects-wrap"}>
             <div>
               {projectData.map((v,i)=>(
                 <ProjectCard key={v.title} image={v.image} title={v.title} description={v.description} skills={v.skills} task={v.task} device={v.device} href={v.href} idx={i}/>
@@ -347,7 +343,11 @@ function App() {
       <Subtitle currentSection={currentSection}/>
       <MenuButton sectionRefs={sectionRefs} isMenuButtonOn={isMenuButtonOn} onClick={()=>!isMenuButtonOn?setIsMenuButtonOn(true):setIsMenuModalOpen(false)}/>
       <MenuModal sectionRefs={sectionRefs} isMenuModalOpen={isMenuModalOpen} setIsMenuModalOpen={setIsMenuModalOpen} currentSection={currentSection} setCurrentSection={setCurrentSection}/>
-
+      
+      <video id={'intro-video'} onCanPlayThrough={()=>setIsLoaded(true)} autoPlay muted loop playsInline
+        style={{width: "100%", height: '100vh', position:"fixed", inset:0, color: "white", overflowX: "hidden", objectFit:'cover', zIndex: -1 }}>
+        <source src={introVideo} type="video/mp4"/>
+      </video>
     </>
   )
 }

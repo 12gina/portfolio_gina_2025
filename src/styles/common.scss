@@ -62,7 +62,8 @@ body {
   font-size: 1.5em;
   color: white;
   opacity: 0;
-  font-size: 700;
+  font-weight: 700;
+  transition: all 0.3s ease;
   > div {
     flex-direction: column;
     display: flex;
@@ -83,10 +84,42 @@ body {
     &.skills {
       transform: translateY(calc(-1.9em * 4));
     }
-  } 
+  }
+  @include respond(md){
+    font-size: 1.2em;
+  }
+  @include respond(sm){
+    width: 9.5em;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 }
 
+#title1 {
+  transition: all 0.3s ease;
+  @include respond(md){
+    > span:nth-of-type(2) {
+      margin-left: -10vw;
+      margin-right: 4vw;
+    }
+    > span:nth-of-type(3) {
+      margin-left: 4vw;
+      margin-right: -7vw;
+    }
+  }
+  @include respond(sm){
+    flex-flow: column;
+    > span {
+      margin: -10vw 0;
+    }
+  }
+}
+
+
 #aboutMe {
+  padding: 5rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
   #name {
     font-size: 2em;
     font-weight: 700;
@@ -113,6 +146,23 @@ body {
       }
     }
   }
+  > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 3em;
+  }
+  @include respond(md){
+    font-size: 1em;
+  }
+  @include respond(sm){
+    padding: 8rem 2rem 0 2rem;
+    height: fit-content !important;
+    > div {
+      display: flex;
+      flex-direction: column;
+      column-gap: 0;
+    }
+  }
   .cell {
     background-color:var(--color-blue-90);
     overflow: hidden;
@@ -127,10 +177,16 @@ body {
 #experiences {
   display: flex;
   place-items: center;
+  padding: 10rem;
+  transition: all 0.3s ease;
   div {
     margin: auto;
     width: 100%;
     max-width: 1440px;
+  }
+  @include respond(md) {
+    padding: 1rem;
+    scale: 0.9;
   }
 }
 
@@ -138,6 +194,7 @@ body {
   display: flex;
   place-items: center;
   overflow: hidden;
+  padding: 10rem;
   div {
     margin: auto;
     width: 100%;
@@ -149,11 +206,21 @@ body {
       position: relative;
     }
   }
+  @include respond(md) {
+    padding: 5rem 3rem;
+    > div {
+      transform: translateX(-10%);
+    }
+  }
 }
 
 // skill
 #skills {
+  padding: 10rem;
   > div {
+  }
+  @include respond(sm) {
+    padding: 2rem;
   }
 }
   
@@ -260,6 +327,7 @@ nav {
         align-items: flex-start;
         font-size: 3rem;
         > span:nth-of-type(3) {
+          margin-left: -2.5rem;
           font-size: 2rem;
           letter-spacing: -1px;
         }
@@ -287,7 +355,7 @@ nav {
       content: "";
       position: absolute;     // 위치 지정
       left: -0.8em;             // 오른쪽에 붙이기
-  top: 42%;
+      top: 42%;
       border-radius: 50%;
       background-color: var(--color-blue);
       opacity: 0.5;
@@ -305,7 +373,7 @@ nav {
   @include respond(sm) {
     font-size: 3rem;
     left: 3rem;
-top: 18%;
+    top: 18%;
   }
   > span {
     opacity: 0.7;
@@ -433,6 +501,7 @@ top: 18%;
   text-align: left;
   transform: translateX(calc(100% + 20rem));
   opacity: 0;
+  transition: all 0.3s ease;
   > div:first-of-type {
     > span {
       color: var(--color-gray-50);
@@ -440,6 +509,11 @@ top: 18%;
   }
   > div{
     white-space: pre-line;
+  }
+    @include respond(md) {
+    padding: 1rem;
+    column-gap: 1em;
+    grid-template-columns: 1.5fr 3.5fr;
   }
 }
 
@@ -577,7 +651,7 @@ top: 18%;
 }
 
 .skill-card {
-  padding: 1.5rem 1.5em 3em 1.5em;
+  padding: 1.5em 1.5em 3em 1.5em;
   box-sizing: border-box;
   border-bottom: 1px solid white;
   width: 100%;
@@ -625,6 +699,12 @@ top: 18%;
       }
     }
   }
+  @include respond(md) {
+    padding: 1em 1em 2em 1em;
+  }
+  // @include respond(md) {
+  //   padding: 1em 1em 2em 1em;
+  // }
 }
 
 .alert {

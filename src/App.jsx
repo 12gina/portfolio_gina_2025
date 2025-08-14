@@ -275,8 +275,8 @@ function App() {
       </section>
 
       {/* 자기소개 */}
-      <section style={{backgroundColor: 'var(--color-blue-90)', width: '100%', height: '100vh', padding: '5rem', boxSizing:'border-box'}} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
-        <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440, display:'grid', columnGap:'3em', gridTemplateColumns:"1fr 1fr",}}>
+      <section style={{backgroundColor: 'var(--color-blue-90)', width: '100%', height: '100vh'}} id={"aboutMe"} ref={el => sectionRefs.current.aboutMe = el}>
+        <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440,}}>
 
           <div style={{width: '100%', height: '100%', rowGap:'2em', display:'flex', flexDirection:"column", justifyContent:'center', alignItems:'flex-end', overflowY: 'hidden'}}>
             
@@ -302,18 +302,18 @@ function App() {
 
           <div style={{position:'relative', padding:'5rem', boxSizing:'border-box', width: '100%', height: '100%', display: 'flex', placeItems:'center', overflowY: 'hidden'}}>
             <img src={photo} style={{width: '100%', margin: 'auto', maxWidth:550, objectFit:'contain'}} alt='photo'/>
-            <div style={{width: '100%', margin: 'auto', maxWidth:550, position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(9, 1fr)'}}>
+            {!isMobile&&<div style={{width: '100%', margin: 'auto', maxWidth:550, position: 'absolute', inset: 0, display:'grid', gridTemplateColumns:'repeat(8, 1fr)', gridTemplateRows:'repeat(9, 1fr)'}}>
               {Array.from({length:80}, (_, i)=>(
                 <GridCell key={i} idx={i} hanCellOn={hanCellOn} hanCellOff={hanCellOff} isCellHover={isCellHover} />
               ))}
-            </div>
+            </div>}
           </div>
 
         </div>
       </section>
         
         {/* 경력 */}
-        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
+        <section style={{width: '100%', height: '100vh', boxSizing:'border-box'}} id={"experiences"} ref={el => sectionRefs.current.experiences = el}>
           <div>
             {expData.map((v, i)=>(
               <ExpCard key={v.company} company={v.company} department={v.department} duration={v.duraiton} description={v.description} idx={i}/>
@@ -322,7 +322,7 @@ function App() {
         </section>
 
         {/* 프로젝트 */}
-        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
+        <section style={{width: '100%', height: '100vh', boxSizing:'border-box'}} id={"projects"} ref={el => sectionRefs.current.projects = el}>
           <div id={"projects-wrap"}>
             <div>
               {projectData.map((v,i)=>(
@@ -333,7 +333,7 @@ function App() {
         </section>
 
         {/* 스킬 */}
-        <section style={{width: '100%', height: '100vh', padding: '10rem', boxSizing:'border-box'}} id={"skills"} ref={el => sectionRefs.current.skills = el}>
+        <section style={{width: '100%', height: '100vh', boxSizing:'border-box'}} id={"skills"} ref={el => sectionRefs.current.skills = el}>
           <div style={{margin: "auto", width: '100%', height: '100%', maxWidth: 1440, display: 'flex', flexDirection:'column', justifyContent:'center', gap:'2em'}}>
             {skillData.map((v, i)=>(
               <SkillCard key={i} description={v.description} skills={v.skills} idx={i}/>
